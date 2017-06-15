@@ -38,6 +38,11 @@ class Watch(models.Model):
         return self.name
 
 
+class watch_category(models.Model):
+    name = models.CharField(max_length=50)
+    display_name = models.CharField(max_length=50)
+    bg = models.FileField()
+    icon = models.FileField()
 
 class Carousel(models.Model):
     name = models.CharField(max_length=100)
