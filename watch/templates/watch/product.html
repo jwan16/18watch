@@ -8,143 +8,135 @@
 			<div class="row">
 				<div class="col-md-9 col-md-push-3">
  <script>
-
   </script>
 
 
-					<div id="search-results" >
-					{% for watch in watch_list %}
-						<div class="col-xs-6 col-sm-3">
-							<div class="card">
-								<a class="img-card various" data-fancybox-type="iframe" href="{{ watch.id }}">
-									<img src="/media/{{ watch.pic }}"/>
-								</a>
-								<br />
-								<div class="card-content">
-									<h4 class="card-title">
-										<a href="http://www.fostrap.com/">
-											{{ watch.name }}
-										</a>
-									</h4>
-									<div class="">
 
-										New Delhi, 2005, Petrol
-									</div>
-								</div>
-								<div class="card-read-more">
-									<a class="btn btn-link btn-block" href="http://www.fostrap.com/">
-										VIEW DETAIL
-									</a>
-								</div>
-							</div>
-						</div>
-					{% endfor %}
+
+	<div id="search-results" >
+	{% for watch in watch_list %}
+		<div class="col-xs-6 col-sm-3">
+			<div class="card">
+				<a class="img-card various" href="{{ watch.id }}">
+					<img src="/media/{{ watch.pic }}"/>
+				</a>
+				<br />
+				<div class="card-content">
+					<h4 class="card-title">
+						<a href="http://www.fostrap.com/">
+							{{ watch.name }}
+						</a>
+					</h4>
+					<div class="">
+
+						New Delhi, 2005, Petrol
 					</div>
 				</div>
+				<div class="card-read-more">
+					<a class="btn btn-link btn-block" href="http://www.fostrap.com/">
+						VIEW DETAIL
+					</a>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+	</div>
+</div>
 
-				<!--Filter Panel -->
-				{% csrf_token %}
-				<form id="filter_panel"  class="hidden-sm">
-				<div class="col-md-3 col-md-pull-9">
-					<div id="accordion" class="panel panel-primary behclick-panel">
-						<div class="panel-heading">
-							<h3 class="panel-title">Search Filter</h3>
-						</div>
-						<div class="panel-body" >
-							<div class="panel-heading " >
-								<h4 class="panel-title">
-									<a data-toggle="collapse" href="#collapse0">
-										<i class="indicator fa fa-caret-down" aria-hidden="true"></i> Price
-									</a>
-								</h4>
-								<h4>
-							  <input type="text" id="amount" readonly style="border:0; color:#337ab7; font-weight:bold; width:140px">
-								</h4>
-								<div id="slider-range" style="margin-bottom:15px"></div>
-							</div>
+<!--Filter Panel -->
+{% csrf_token %}
+<form id="filter_panel"  class="hidden-sm">
+<div class="col-md-3 col-md-pull-9">
+	<div id="accordion" class="panel panel-primary behclick-panel">
+		<div class="panel-heading">
+			<h4 class="panel-title">Search Filter</h4>
+		</div>
+		<div class="panel-body" >
+
+		 <!-- Filter Brand -->
+		  <div class="dropdown">
+			<button class="btn btn-default dropdown-toggle" type="button" id="filter_brand" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width:100%; background-color:transparent">
+			  Brand
+			<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="width:100%; margin-top:-20px">
+			  {% for brand in brand_list %}
+				<li><a><input name="brand" type="submit" value="{{ brand.name }}" style="background-color: transparent; border:none; width:100%"/></a></li>
+			  {% endfor %}
+			</ul>
+		  </div>
+
+		<!-- Filter Color -->
+		  <div class="dropdown">
+			<button class="btn btn-default dropdown-toggle" type="button" id="filter_year" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width:100%; background-color:transparent">
+			  Color
+			<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="width:100%; margin-top:-20px">
+			  {% for color in color_list %}
+				<li><a><input name="color" type="submit" value="{{ color }}" style="background-color: transparent; border:none; width:100%"/></a></li>
+			  {% endfor %}
+			</ul>
+		  </div>
+
+		<!-- Filter Movement -->
+		  <div class="dropdown">
+			<button class="btn btn-default dropdown-toggle" type="button" id="filter_year" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width:100%; background-color:transparent">
+			  Movement
+			<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="width:100%; margin-top:-20px">
+			  {% for movement in movement_list %}
+				<li><a><input name="movement" type="submit" value="{{ movement }}" style="background-color: transparent; border:none; width:100%"/></a></li>
+			  {% endfor %}
+			</ul>
+		  </div>
 
 
+				<h4 class="panel-title">
+					<a data-toggle="collapse" href="#collapse0">
+						<i class="indicator fa fa-caret-down" aria-hidden="true"></i>
+						<h4 style="color: white">Price</h4>
+					</a>
+				</h4>
+				<h4>
+			  <input type="text" id="amount" readonly style="color:white; border:0; background-color:#337ab7; font-weight:bold; width:140px">
+				</h4>
+				<div id="slider-range" style="margin-bottom:15px"></div>
 
-
-
-							<div class="panel-heading " >
-								<h4 class="panel-title">
-									<a data-toggle="collapse" href="#collapse1">
-										<i class="indicator fa fa-caret-down" aria-hidden="true"></i> Brand
-									</a>
-								</h4>
-							</div>
-
-							<!-- Brand List-->
-							<div id="collapse1" class="panel-collapse collapse in" >
-								<ul class="list-group">
-									{% for brand in brand_list %}
-									<li class="list-group-item">
-										<div class="checkbox">
-											<label>
-												<input type="checkbox" value="{{ brand.name }}" class="brand" >
-												{{ brand.name }}
-											</label>
-										</div>
-									</li>
-									{% endfor %}
-								</ul>
-							</div>
-							<div class="panel-heading" >
-							<!-- End Brand List-->
-
-
-								<h4 class="panel-title">
-									<a data-toggle="collapse" href="#collapse3"><i class="indicator fa fa-caret-down" aria-hidden="true"></i> Color</a>
-								</h4>
-							</div>
-							<div id="collapse3" class="panel-collapse collapse in">
-								<ul class="list-group">
-									{% for color in color_list %}
-									<li class="list-group-item">
-										<div class="checkbox">
-											<label>
-												<input type="checkbox" class="color" value="{{ color }}">
-												{{ color }}
-											</label>
-										</div>
-									</li>
-									{% endfor %}
-								</ul>
-							</div>
-							<div class="panel-heading" >
-								<h4 class="panel-title">
-									<a data-toggle="collapse" href="#collapse2"><i class="indicator fa fa-caret-right" aria-hidden="true"></i> Collapsible list group</a>
-								</h4>
-							</div>
-							<div id="collapse2" class="panel-collapse collapse">
-								<ul class="list-group">
-									<li class="list-group-item">
-										<div class="checkbox">
-											<label>
-												<input type="checkbox" value="">
-												7
-											</label>
-										</div>
-									</li>
-									<li class="list-group-item">
-										<div class="checkbox" >
-											<label>
-												<input type="checkbox" value="">
-												8
-											</label>
-										</div>
-									</li>
-									<li class="list-group-item">
-										<div class="checkbox">
-											<label>
-												<input type="checkbox" value="">
-												9
-											</label>
-										</div>
-									</li>
-								</ul>
-							</div>
+		<div class="panel-heading" >
+			<h4 class="panel-title">
+				<a data-toggle="collapse" href="#collapse2"><i class="indicator fa fa-caret-right" aria-hidden="true"></i> Collapsible list group</a>
+			</h4>
+		</div>
+		<div id="collapse2" class="panel-collapse collapse">
+			<ul class="list-group">
+				<li class="list-group-item">
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="">
+							7
+						</label>
+					</div>
+				</li>
+				<li class="list-group-item">
+					<div class="checkbox" >
+						<label>
+							<input type="checkbox" value="">
+							8
+						</label>
+					</div>
+				</li>
+				<li class="list-group-item">
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="">
+							9
+						</label>
+					</div>
+				</li>
+			</ul>
+		</div>
 						</div>
 					</div>
 				</div>
@@ -154,6 +146,6 @@
 	</div>
 <script type="text/javascript">
 		var filter_brand_list = [{% for brand in brand_list %}"{{ brand.name }}",{% endfor %}];
-
 </script>
 {% endblock %}
+

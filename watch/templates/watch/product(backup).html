@@ -1,0 +1,58 @@
+{% extends 'watch/base.html' %}
+{% block title %}product{% endblock %}
+
+{% block body %}
+<div class="container" style="margin-top:75px">
+
+<!-- Menu Filter-->
+<div class="menubar" style="margin-bottom:30px">
+	<h2>Find Your Dream Watch</h2>(Easy search form here)
+
+
+	<!--Button Template-->
+
+
+</div>
+
+<!--End of Menu Filter-->
+</div>
+<div id="fh5co-main">
+		<div class="container">
+			<!--Filter Panel -->
+		{% csrf_token %}
+
+		<div id="search-results" >
+		{% for watch in watch_list %}
+			<div class="col-xs-6 col-sm-3">
+				<div class="card">
+					<a class="img-card various" data-fancybox-type="iframe" href="{{ watch.id }}">
+						<img src="/media/{{ watch.pic }}" style="width:100% height:350px"/>
+					</a>
+					<br />
+					<div class="card-content">
+						<h4 class="card-title">
+							<a href="http://www.fostrap.com/">
+								{{ watch.name }}
+							</a>
+						</h4>
+						<div class="">
+
+							New Delhi, 2005, Petrol
+						</div>
+					</div>
+
+				</div>
+			</div>
+		{% endfor %}
+
+
+
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript">
+		var filter_brand_list = [{% for brand in brand_list %}"{{ brand.name }}",{% endfor %}];
+
+</script>
+{% endblock %}

@@ -17,10 +17,15 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic.base import TemplateView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('watch.urls')),
+    url(r'^accounts/profile/$', TemplateView.as_view(template_name='watch/account/profile.html')),
+    url(r'^testing',TemplateView.as_view(template_name='watch/testing.html')),
+    # url(r'^accounts/', include('allauth.urls')),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
 ]
 
 if settings.DEBUG:

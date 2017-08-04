@@ -11,6 +11,27 @@ import operator
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import json
 from functools import reduce
+from django import forms
+from django.contrib.auth import authenticate, login
+
+def login_user(request):
+    state = "Please log in below..."
+    username = password = ''
+    if request.POST:
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                state = "You're successfully logged in!"
+            else:
+                state = "Your account is not active, please contact the site admin."
+        else:
+            state = "Your username and/or password were incorrect."
+
+    return render_to_response('index.html',{'state':state, 'username': username})
 
 # class IndexView(generic.ListView):
 #     template_name = 'watch/index.html'
@@ -36,18 +57,25 @@ def index_view(request):
     }
     return render(request, "watch/index.html", context)
 
+
 def watch_list(request):
     brand_list = Brand.objects.all()
     watch_list = Watch.objects.all()
     color_list = Watch.objects.values_list('color', flat=True).distinct()
+    movement_list = Watch.objects.values_list('movement', flat=True).distinct()
     no_of_available = Watch.objects.all().count
     query = request.GET.get("q")
+    filter = request.GET.get("filter")
     category_query = request.GET.get("query")
     if query:
         watch_list = watch_list.filter(
             Q(name__icontains=query)|
             Q(year__icontains=query)
             ).distinct()
+    if filter:
+        watch_list = watch_list.filter
+
+    # Paginator
     page = request.GET.get('page', 1)
     paginator = Paginator(watch_list, 12)
     try:
@@ -62,6 +90,7 @@ def watch_list(request):
         "watch_list": watch_list,
         "brand_list": brand_list,
         "color_list": color_list,
+        "movement_list": movement_list,
         "List": "List",
         "no_of_available": no_of_available
     }
@@ -114,3 +143,7 @@ def filter(request):
 class detail_list(generic.DetailView):
     model = Watch
     template_name = 'watch/product_detail.html'
+
+class UserForm(forms.Form):
+    username = forms.CharField(label='用户名',max_length=100)
+    password = forms.CharField(label='密码',widget=forms.PasswordInput())

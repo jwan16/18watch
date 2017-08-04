@@ -60,7 +60,7 @@
 	</head>
 	<body>
 
-	<header id="fh5co-header" role="banner">
+	<header id="fh5co-header" role="banner" style="position: relative;">
 		<nav class="navbar navbar-default" role="navigation">
 			<div class="container-fluid">
 				<div class="navbar-header">
@@ -76,13 +76,42 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li {% if request.path == '/' %} class="active" {% endif %}><a href="/"><span>Home <span class="border"></span></span></a></li>
 						<li {% if request.path == '/watch/' %} class="active" {% endif %}><a href="/watch" ><span>All Products<span class="border"></span></span></a></li>
-						<li><a href="left-sidebar.html"><span>About Us <span class="border"></span></span></a></li>
-						<li><a href="/contact/"><span>Contact Us <span class="border"></span></span></a></li>
+
+
+						{% if user.is_authenticated %}
+						<li onmouseover="document.getElementById('user_panel').style.display = 'block';" onmouseout="document.getElementById('user_panel').style.display = 'none';">
+							<a><span>{% load account %}{% user_display user %}<span class="border"> </span></span></a>
+							<ul id='user_panel' class="dropdown-menu" aria-labelledby="dropdownMenu1" style="width:100%; margin-top:-10px">
+								<li><a href="accounts/logout">Logout</a></li>
+						  	</ul>
+						</li>
+						{% else %}
+
+						<!-- Login -->
+						<li onmouseover="document.getElementById('login_panel').style.display = 'block';" onmouseout="document.getElementById('login_panel').style.display = 'none';">
+						  <a><span><span class="glyphicon glyphicon-user" aria-hidden="true" ></span>&nbspLogin<span class="border"></span></span></a>
+						  <ul id='login_panel' class="dropdown-menu" aria-labelledby="dropdownMenu1" style="width:100%; margin-top:-10px">
+						  	<li>
+								<form method="post" action="{% url 'login' %}">
+									{% csrf_token %}
+									<input type="text" name="username" value="" id="username">
+									<input type="password" name="password" value="" id="password">
+									<input type="submit" value="login" />
+									<input type="hidden" name="next" value="{{ next|escape }}" />
+								</form>
+							</li>
+						  </ul>
+						</li>
+						{% endif %}
+
+
+						<!--<li><a href="/contact/"><span>Contact Us <span class="border"></span></span></a></li>-->
 					</ul>
 					<div id="custom-search-input">
 					<form href="/get/" class="input-group " role="search" method="GET" action="/watch" >
 
 							<input type="text" class="search-query form-control" placeholder="Search" id="srchFld" name="q" value="{{ request.GET.q }}"/>
+
 							<span class="input-group-btn">
 								<button id="submitButton" class="btn btn-danger" type="submit">
 									<span class=" glyphicon glyphicon-search"></span>
@@ -95,6 +124,7 @@
 			</div>
 		</nav>
 	</header>
+
 	<!-- END .header -->
 {% block carousel %}
 {% endblock %}
@@ -191,5 +221,11 @@
 	<!-- Main JS -->
 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+	<!--testing -->
+	<script type="text/javascript">
+		function show_login(){
+
+	</script>
 	</body>
 </html>

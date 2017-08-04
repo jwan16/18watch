@@ -2890,15 +2890,6 @@ tbody.collapse.in {
   color: #333333;
   white-space: nowrap; }
 
-.dropdown-menu > li > input {
-  display: block;
-  padding: 3px 20px;
-  clear: both;
-  font-weight: normal;
-  line-height: 1.42857;
-  color: #333333;
-  white-space: nowrap; }
-
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
   text-decoration: none;
   color: #262626;
@@ -5437,14 +5428,15 @@ pre {
 
 /* Buttons */
 .btn {
+  border-bottom: none !important;
   text-transform: uppercase;
-  color: white;
   letter-spacing: 2px;
   margin-bottom: 20px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
+  border-radius: 5px;
   padding-left: 20px;
   padding-right: 20px;
   margin-right: 10px; }
