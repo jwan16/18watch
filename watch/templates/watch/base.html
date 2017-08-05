@@ -72,8 +72,8 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li {% if request.path == '/' %} class="active" {% endif %}><a href="/"><span>Home <span class="border"></span></span></a></li>
 						<li {% if request.path == '/watch/' %} class="active" {% endif %}><a href="/watch" ><span>All Products<span class="border"></span></span></a></li>
-
-
+						<li {% if request.path == '/about/' %} class="active" {% endif %}><a href="/watch" ><span>About Us<span class="border"></span></span></a></li>
+						<li {% if request.path == '/contact/' %} class="active" {% endif %}><a href="/watch" ><span>Contact Us<span class="border"></span></span></a></li>
 						{% if user.is_authenticated %}
 						<li onmouseover="document.getElementById('user_panel').style.display = 'block';" onmouseout="document.getElementById('user_panel').style.display = 'none';">
 							<a><span>{% load account %}{% user_display user %}<span class="border"> </span></span></a>
