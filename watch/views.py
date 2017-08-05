@@ -13,6 +13,8 @@ import json
 from functools import reduce
 from django import forms
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 def login_user(request):
     state = "Please log in below..."
@@ -39,10 +41,8 @@ def login_user(request):
 #
 #     def get_queryset(self):
 #         return Brand.objects.all()
-def contact_view(request):
-   return render_to_response('watch/contact_us.html')
 
-def index_view(request):
+def IndexView(request):
     brand_list = Brand.objects.all()
     watch_list = Watch.objects.all()
     carousel_list = Carousel.objects.all()
@@ -58,7 +58,7 @@ def index_view(request):
     return render(request, "watch/index.html", context)
 
 
-def watch_list(request):
+def WatchList(request):
     brand_list = Brand.objects.all()
     watch_list = Watch.objects.all()
     color_list = Watch.objects.values_list('color', flat=True).distinct()
@@ -140,10 +140,25 @@ def filter(request):
     }
     return render(request, "watch/search_result.html",context)
 
-class detail_list(generic.DetailView):
+class DetailList(generic.DetailView):
     model = Watch
     template_name = 'watch/product_detail.html'
 
 class UserForm(forms.Form):
     username = forms.CharField(label='用户名',max_length=100)
     password = forms.CharField(label='密码',widget=forms.PasswordInput())
+
+
+
+
+class InventoryByUserListView(LoginRequiredMixin, generic.ListView):
+    """
+    Generic class-based view listing books on loan to current user.
+    """
+    model = Watch
+    context_object_name = 'watches'
+    template_name = 'watch/inventory.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return Watch.objects.filter(owner=self.request.user)

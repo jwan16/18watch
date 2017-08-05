@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 from multiupload.fields import MultiFileField
+from django.contrib.auth.models import User
 
 class Brand(models.Model):
     name = models.CharField(max_length=250, unique=True)
@@ -17,6 +18,7 @@ class Brand(models.Model):
 
 class Watch(models.Model):
     watch_brand = models.ForeignKey(Brand, on_delete=models.CASCADE, verbose_name="Brand")
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     name =  models.CharField(max_length=50, verbose_name="Name")
     year =  models.CharField(max_length=10, verbose_name="Year")
     price = models.IntegerField()
@@ -33,6 +35,7 @@ class Watch(models.Model):
     large_pic = models.FileField()
     featured = models.BooleanField()
     pub_date = models.DateTimeField(auto_now_add=True)
+
 
     def __str__(self):
         return self.name
