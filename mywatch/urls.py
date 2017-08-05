@@ -29,6 +29,7 @@ urlpatterns = [
     # url(r'^accounts/', include('allauth.urls')),
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^contact/$', TemplateView.as_view(template_name='watch/contact_us.html')),
+    url(r'^about/$', TemplateView.as_view(template_name='watch/about_us.html')),
 ]
 
 if settings.DEBUG:
