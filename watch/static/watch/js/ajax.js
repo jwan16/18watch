@@ -19,6 +19,7 @@ $(function() {
             data: {
                 "selected_brand[]": selected_brand,
                 "selected_color[]": selected_color,
+                "selected_movement[]": selected_movement,
                 filter_price_max,
                 filter_price_min,
                 csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken").val(),

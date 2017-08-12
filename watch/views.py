@@ -87,7 +87,7 @@ def WatchList(request):
 
     selected_brand_list = request.session.get('filter_brand')
 
-    request.session.setdefault('filter_price_max', 30000)
+    request.session.setdefault('filter_price_max', 100000)
     request.session.setdefault('filter_price_min', 0)
     filter_price_max = request.session.get('filter_price_max')
     filter_price_min = request.session.get('filter_price_min')
@@ -138,6 +138,7 @@ def filter(request):
     filter_price_min = request.POST.get("filter_price_min")
     filter_color = request.POST.getlist("selected_color[]")
     filter_brand = request.POST.getlist("selected_brand[]")
+    filter_movement = request.POST.getlist("selected_movement[]")
     print(filter_brand)
     if filter_price_max:
         request.session['filter_price_max'] = filter_price_max
@@ -147,8 +148,8 @@ def filter(request):
         request.session['filter_color'] = filter_color
     if len(filter_brand) >= 0:
         request.session['filter_brand'] = filter_brand
-    print(request.session.get('filter_color'))
-
+    if len(filter_movement) >= 0:
+        request.session['filter_movement'] = filter_movement
     # Filter Max/Min Price
     if request.session['filter_price_max'] is not None:
         filtered_list = filtered_list.filter(price__lt=request.session.get('filter_price_max'))
@@ -159,10 +160,12 @@ def filter(request):
     if request.session.get('filter_color') is not None:
         if len(request.session.get('filter_color')) > 0:
             filtered_list = filtered_list.filter(color__in=request.session.get('filter_color'))
-    print(request.session.get('filter_brand'))
     if request.session.get('filter_brand') is not None:
         if len(request.session.get('filter_brand')) > 0:
             filtered_list = filtered_list.filter(watch_brand__name__in=request.session.get('filter_brand'))
+    if request.session.get('filter_movement') is not None:
+        if len(request.session.get('filter_movement')) > 0:
+            filtered_list = filtered_list.filter(movement__name__in=request.session.get('filter_movement'))
 
 
 
