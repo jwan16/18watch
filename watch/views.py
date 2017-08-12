@@ -9,7 +9,7 @@ from django.shortcuts import render_to_response
 from django.db.models import Q
 import operator
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-import json
+from numbers import Number
 from functools import reduce
 from django import forms
 from django.contrib.auth import authenticate, login
@@ -85,14 +85,20 @@ def WatchList(request):
     except EmptyPage:
         watch_list = paginator.page(paginator.num_pages)
 
+    selected_brand_list = request.session.get('filter_brand')
 
+    filter_price_max = request.session.get('filter_price_max')
+    filter_price_min = request.session.get('filter_price_min')
     context = {
         "watch_list": watch_list,
         "brand_list": brand_list,
         "color_list": color_list,
         "movement_list": movement_list,
         "List": "List",
-        "no_of_available": no_of_available
+        "no_of_available": no_of_available,
+        "filter_price_max": filter_price_max,
+        "filter_price_min": filter_price_min,
+        "selected_brand_list": selected_brand_list,
     }
 
     return render(request, "watch/product.html",context)
@@ -120,23 +126,51 @@ def filter(request):
     brand_list = Brand.objects.all()
     filtered_list = Watch.objects.all()
 
-        # selected_color = request.POST.getlist('selected_color')
-    selected_color = request.POST.getlist('selected_color[]')
-    selected_brand = request.POST.getlist('selected_brand[]')
-    filter_price_max = request.POST['filter_price_max']
-    filter_price_min = request.POST['filter_price_min']
+    # Filter Max Price
 
-    filtered_list = filtered_list.filter(price__gt = filter_price_min)
-    # if selected_color:
-    #     filtered_list = filtered_list.filter(color__in = selected_color)
-    if selected_brand:
-        filtered_list = filtered_list.filter(watch_brand__name__in = selected_brand)
-    if selected_color:
-        filtered_list = filtered_list.filter(color__in = selected_color)
+
+
+    # Get Ajax
+    filter_price_max = request.POST.get("filter_price_max")
+    filter_price_min = request.POST.get("filter_price_min")
+    filter_color = request.POST.getlist("selected_color[]")
+    filter_brand = request.POST.getlist("selected_brand[]")
+    print(filter_brand)
+    if filter_price_max:
+        request.session['filter_price_max'] = filter_price_max
+    if filter_price_min:
+        request.session['filter_price_min'] = filter_price_min
+    if len(filter_color) >= 0:
+        request.session['filter_color'] = filter_color
+    if len(filter_brand) >= 0:
+        request.session['filter_brand'] = filter_brand
+    print(request.session.get('filter_color'))
+
+    # Filter Max/Min Price
+    if request.session['filter_price_max'] is not None:
+        filtered_list = filtered_list.filter(price__lt=request.session.get('filter_price_max'))
+    if request.session['filter_price_min'] is not None:
+        filtered_list = filtered_list.filter(price__gt=request.session.get('filter_price_min'))
+
+    # Filter brand, color, movement,
+    if request.session.get('filter_color') is not None:
+        if len(request.session.get('filter_color')) > 0:
+            filtered_list = filtered_list.filter(color__in=request.session.get('filter_color'))
+    print(request.session.get('filter_brand'))
+    if request.session.get('filter_brand') is not None:
+        if len(request.session.get('filter_brand')) > 0:
+            filtered_list = filtered_list.filter(watch_brand__name__in=request.session.get('filter_brand'))
+
+    # filter_brand_list = request.POST.getlist("selected_brand[]")
+    # if filter_brand_list:
+    #     filtered_list = filtered_list.filter(watch_brand__name__in=filter_brand_list)
+    # filter_color_list = request.POST.getlist("selected_color[]")
+    # if filter_color_list:
+    #     filtered_list = filtered_list.filter(watch_color__name__in=filter_color_list)
 
     context = {
         "filtered_list": filtered_list,
-        'selected_brand': selected_brand,
+        # 'selected_brand': selected_brand,
     }
     return render(request, "watch/search_result.html",context)
 
@@ -162,3 +196,4 @@ class InventoryByUserListView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         return Watch.objects.filter(owner=self.request.user)
+

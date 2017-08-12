@@ -230,20 +230,26 @@ $(document).ready(function() {
 
 // Price range
 $( function() {
+    var min_price = Number($('#amount').attr('min_price'))
+    var max_price = Number($('#amount').attr('max_price'))
+
     $( "#slider-range" ).slider({
       range: true,
       min: 0,
       max: 30000,
-      values: [ 0, 30000 ],
-      slide: function( event, ui ) {
-        $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-        $("#filter_panel").trigger("change");
-      }
+      values: [ min_price, max_price ],
+//      slide: function( event, ui ) {
+//        $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+//        $("#filter_panel").trigger("change");
+//      },
+      stop: function(event, ui) {
+            $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+            $("#filter_panel").trigger("change");
+      },
     });
     $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
       " - $" + $( "#slider-range" ).slider( "values", 1 ) );
-
-  } );
+} );
 
 
 //Show Hide Menu
