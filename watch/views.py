@@ -87,8 +87,11 @@ def WatchList(request):
 
     selected_brand_list = request.session.get('filter_brand')
 
+    request.session.setdefault('filter_price_max', 30000)
+    request.session.setdefault('filter_price_min', 0)
     filter_price_max = request.session.get('filter_price_max')
     filter_price_min = request.session.get('filter_price_min')
+
     context = {
         "watch_list": watch_list,
         "brand_list": brand_list,
@@ -160,6 +163,8 @@ def filter(request):
     if request.session.get('filter_brand') is not None:
         if len(request.session.get('filter_brand')) > 0:
             filtered_list = filtered_list.filter(watch_brand__name__in=request.session.get('filter_brand'))
+
+
 
     # filter_brand_list = request.POST.getlist("selected_brand[]")
     # if filter_brand_list:
