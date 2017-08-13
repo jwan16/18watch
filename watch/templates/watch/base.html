@@ -27,11 +27,11 @@
 	<link rel="shortcut icon" href="favicon.ico">
 
 	<!-- Google Webfonts -->
-	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+		{% load staticfiles %}
+	<link src="{% static 'watch/css/roboto.css' %}" rel='stylesheet' type='text/css'>
+	<link src=""{% static 'watch/css/montserrat.css' %}" rel='stylesheet' type='text/css'>
 
 	<!-- Animate.css -->
-	{% load staticfiles %}
 	<link rel="stylesheet" href="{% static 'watch/css/animate.css' %}">
 	<link rel="stylesheet" href="{% static 'watch/css/base.css' %}">
 	<!-- Icomoon Icon Fonts-->
@@ -50,10 +50,10 @@
 	<![endif]-->
 	<script src="{% static 'watch/js/jquery.min.js' %}"></script>
 	<script src="{% static 'watch/js/new_style.js' %}"></script>
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
-	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="{% static 'watch/css/jquery.fancybox.min.css' %}" media="screen">
+	<link rel="stylesheet" href="{% static 'watch/css/jquery-ui.css' %}">
 	<!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
-  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  	<script src="{% static 'watch/js/jquery-ui.js' %}"></script>
 	<script src="{% static 'watch/js/main.js' %}"></script>
 	</head>
 	<body>
