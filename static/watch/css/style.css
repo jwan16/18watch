@@ -5441,8 +5441,7 @@ pre {
   margin-right: 10px; }
 .btn:hover, .btn:focus, .btn:active {
   box-shadow: none;
-  outline: none !important;
-  border-color: transparent; }
+  outline: none !important; }
 .btn.fh5co-btn-icon {
   text-transform: none !important;
   letter-spacing: normal !important;

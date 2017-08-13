@@ -14,33 +14,8 @@ from functools import reduce
 from django import forms
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponse, HttpResponseNotAllowed
 
-
-def login_user(request):
-    state = "Please log in below..."
-    username = password = ''
-    if request.POST:
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                state = "You're successfully logged in!"
-            else:
-                state = "Your account is not active, please contact the site admin."
-        else:
-            state = "Your username and/or password were incorrect."
-
-    return render_to_response('index.html',{'state':state, 'username': username})
-
-# class IndexView(generic.ListView):
-#     template_name = 'watch/index.html'
-#     context_object_name = 'all_brands'
-#
-#     def get_queryset(self):
-#         return Brand.objects.all()
 
 def IndexView(request):
     brand_list = Brand.objects.all()
@@ -48,12 +23,14 @@ def IndexView(request):
     carousel_list = Carousel.objects.all()
     feature_list = watch_list.filter(featured=True)
     latest_list = watch_list.order_by('pub_date')[:4]
+    movement_list = Watch.objects.values_list('movement', flat=True).distinct()
     context = {
         "watch_list": watch_list,
         "brand_list": brand_list,
         "feature_list": feature_list,
         "latest_list": latest_list,
         "carousel_list": carousel_list,
+        "movement_list": movement_list,
     }
     return render(request, "watch/index.html", context)
 
@@ -205,3 +182,21 @@ class InventoryByUserListView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         return Watch.objects.filter(owner=self.request.user)
 
+def update_session(request):
+    if not request.is_ajax() or not request.method=='POST':
+        return HttpResponseNotAllowed(['POST'])
+    print('update_session is working.')
+    filter_price_max = request.POST.get("filter_price_max")
+    filter_price_min = request.POST.get("filter_price_min")
+    filter_brand = request.POST.getlist("selected_brand[]")
+    filter_movement = request.POST.getlist("selected_movement[]")
+    if filter_price_max:
+        request.session['filter_price_max'] = filter_price_max
+    if filter_price_min:
+        request.session['filter_price_min'] = filter_price_min
+    if len(filter_brand) >= 0:
+        request.session['filter_brand'] = filter_brand
+    if len(filter_movement) >= 0:
+        request.session['filter_movement'] = filter_movement
+    print(request.session.get('filter_price_max'))
+    return HttpResponse('ok')
