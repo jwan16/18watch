@@ -2769,7 +2769,7 @@ a.btn.disabled, fieldset[disabled] a.btn {
   -webkit-box-shadow: none;
   box-shadow: none; }
 .btn-link, .btn-link:hover, .btn-link:focus, .btn-link:active {
-  border-color: transparent; }
+  border-color: #8c8c8c; }
 .btn-link:hover, .btn-link:focus {
   color: #ea8e05;
   text-decoration: underline;
@@ -5441,7 +5441,8 @@ pre {
   margin-right: 10px; }
 .btn:hover, .btn:focus, .btn:active {
   box-shadow: none;
-  outline: none !important; }
+  border-color: #8c8c8c
+   }
 .btn.fh5co-btn-icon {
   text-transform: none !important;
   letter-spacing: normal !important;

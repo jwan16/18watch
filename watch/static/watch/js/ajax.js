@@ -60,21 +60,21 @@ $('#index_filter').submit(function () {
     var filter_price_min = $( "#slider-range" ).slider( "values", 0 );
     console.log(filter_price_max);
     $.ajax({
-            url: "/update_session/", // link of your "whatever" php
-            type: "POST",
-            data: {
-                "selected_brand[]": selected_brand,
-                "selected_movement[]": selected_movement,
-                filter_price_max,
-                filter_price_min,
-                csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken").val(),
-                 // all data will be passed here
-            },
-            success: function(data){
-                 window.location.assign('watch')
-            }
-        });
+        url: "/update_session/",
+        type: "POST",
+        data: {
+            "selected_brand[]": selected_brand,
+            "selected_movement[]": selected_movement,
+            filter_price_max,
+            filter_price_min,
+            csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken").val(),
+             // all data will be passed here
+        },
+        success: function(data){
+             window.location.assign('watch')
+        }
     });
+});
 //$(function() {
 //    $('#index_filter').change(function(){
 //        $.post('/update_session/', function(data) {
