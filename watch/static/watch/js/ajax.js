@@ -53,12 +53,11 @@ $(document).ready(function() {
 
 $('#index_filter').submit(function () {
     console.log("Inside click");
+
     var selected_brand = $('input[class="brand"]:checked').map(function(){return this.value;}).get();
-//    var selected_color = $('input[class="color"]:checked').map(function(){return this.value;}).get();
     var selected_movement = $('input[class="movement"]:checked').map(function(){return this.value;}).get();
     var filter_price_max = $( "#slider-range" ).slider( "values", 1 );
     var filter_price_min = $( "#slider-range" ).slider( "values", 0 );
-    console.log(filter_price_max);
     $.ajax({
         url: "/update_session/",
         type: "POST",
@@ -71,7 +70,8 @@ $('#index_filter').submit(function () {
              // all data will be passed here
         },
         success: function(data){
-             window.location.assign('watch')
+             window.location.assign('watch');
+             console.
         }
     });
 });
