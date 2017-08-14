@@ -1,6 +1,27 @@
 {% extends 'watch/base.html' %}
-
-
+{% block body %}
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'watch/css/gczoom.css' %}">
+<script src="{% static 'watch/js/gczoom.js' %}"></script>
+<div class="container">
+	<div class="row">
+		<h2>Simple Bootstrap Product Zoom Box</h2>
+	</div>
+	<div class="">
+                <ul id="glasscase" class="gc-start">
+                    <li><img src="https://s3.envato.com/files/45256524/03_product%20page.jpg" alt="Text" data-gc-caption="Your caption text" /></li>
+                    <li><img src="https://www.magentocommerce.com/magento-connect/media/catalog/product/cache/9/image/9df78eab33525d08d6e5fb8d27136e95/m/a/magento_template_shoe_store_product_details_1.jpg" alt="Text" /></li>
+                    <li><img src="https://themes.3rdwavemedia.com/wp-content/uploads/2014/09/pricing.jpg" alt="Text" /></li>
+                </ul>
+            </div><a href="http://tinycomp.net/products/glasscase-jquery-product-image-zoom-plugin/examples.aspx">For More Guide</a>
+</div>
+<script type="text/javascript">
+        $(document).ready( function () {
+            //If your <ul> has the id "glasscase"
+            $('#glasscase').glassCase({ 'thumbsPosition': 'bottom', 'widthDisplay' : 300});
+        });
+    </script>
+{% endblock %}
 
 
 

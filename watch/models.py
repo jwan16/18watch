@@ -32,6 +32,8 @@ class Watch(models.Model):
     bracelet_color = models.CharField(max_length=30, verbose_name="Bracelet Color")
     bracelet_length = models.CharField(max_length=30, verbose_name="Bracelet Length")
     pic = models.ImageField()
+    pic2 = models.ImageField()
+    pic3 = models.ImageField()
     large_pic = models.FileField()
     featured = models.BooleanField()
     pub_date = models.DateTimeField(auto_now_add=True)
