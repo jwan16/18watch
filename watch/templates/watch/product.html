@@ -87,7 +87,7 @@
 						<li class="list-group-item">
 							<div class="checkbox">
 								<label>
-									<input type="checkbox" value="{{ movement }}" class="movement" >
+									<input type="checkbox" value="{{ movement }}" {% if movement in selected_movementgit %} checked {% endif %}  class="movement" >
 									{{ movement }}
 								</label>
 							</div>
