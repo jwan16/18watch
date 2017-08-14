@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6c38a93d-9bfb-49ca-8be0-c866f5b727ad" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/watch/templates/watch/product.html" afterPath="$PROJECT_DIR$/watch/templates/watch/product.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/watch/static/watch/js/ajax.js" afterPath="$PROJECT_DIR$/watch/static/watch/js/ajax.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,13 +17,13 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ajax.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ajax.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/watch/static/watch/js/ajax.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="62" column="51" lean-forward="false" selection-start-line="62" selection-start-column="51" selection-end-line="62" selection-end-column="51" />
+            <state relative-caret-position="353">
+              <caret line="58" column="3" lean-forward="false" selection-start-line="58" selection-start-column="3" selection-end-line="58" selection-end-column="3" />
               <folding>
-                <marker date="1502681804000" expanded="true" signature="1736:1807" ph="..." />
+                <marker date="1502684262000" expanded="true" signature="1736:1807" ph="..." />
               </folding>
             </state>
           </provider>
@@ -52,18 +52,18 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mywatch/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="376">
-              <caret line="142" column="17" lean-forward="false" selection-start-line="142" selection-start-column="17" selection-end-line="142" selection-end-column="17" />
+            <state relative-caret-position="1">
+              <caret line="117" column="53" lean-forward="true" selection-start-line="117" selection-start-column="53" selection-end-line="117" selection-end-column="53" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="product.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="product.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/watch/templates/watch/product.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="211">
-              <caret line="89" column="117" lean-forward="false" selection-start-line="89" selection-start-column="117" selection-end-line="89" selection-end-column="117" />
+              <caret line="89" column="120" lean-forward="false" selection-start-line="89" selection-start-column="120" selection-end-line="89" selection-end-column="120" />
               <folding>
                 <element signature="n#style#0;n#h4#0;n#a#0;n#h4#0;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#input#0;n#h4#1;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -76,8 +76,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/watch/templates/watch/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
-              <caret line="35" column="143" lean-forward="true" selection-start-line="35" selection-start-column="80" selection-end-line="35" selection-end-column="143" />
+            <state relative-caret-position="135">
+              <caret line="85" column="18" lean-forward="true" selection-start-line="85" selection-start-column="18" selection-end-line="85" selection-end-column="18" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
@@ -217,8 +217,8 @@
         <option value="$PROJECT_DIR$/static/watch/css/style.css" />
         <option value="$PROJECT_DIR$/static/watch/css/base.css" />
         <option value="$PROJECT_DIR$/watch/templates/watch/index.html" />
-        <option value="$PROJECT_DIR$/watch/static/watch/js/ajax.js" />
         <option value="$PROJECT_DIR$/watch/templates/watch/product.html" />
+        <option value="$PROJECT_DIR$/watch/static/watch/js/ajax.js" />
       </list>
     </option>
   </component>
@@ -880,14 +880,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mywatch/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="142" column="17" lean-forward="false" selection-start-line="142" selection-start-column="17" selection-end-line="142" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/watch/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-7087">
@@ -936,16 +928,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/watch/static/watch/js/ajax.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="62" column="51" lean-forward="false" selection-start-line="62" selection-start-column="51" selection-end-line="62" selection-end-column="51" />
-          <folding>
-            <marker date="1502681804000" expanded="true" signature="1736:1807" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/watch/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="143">
@@ -956,10 +938,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/watch/templates/watch/product.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="89" column="120" lean-forward="false" selection-start-line="89" selection-start-column="120" selection-end-line="89" selection-end-column="120" />
+          <folding>
+            <element signature="n#style#0;n#h4#0;n#a#0;n#h4#0;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#h4#1;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#3;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mywatch/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1">
+          <caret line="117" column="53" lean-forward="true" selection-start-line="117" selection-start-column="53" selection-end-line="117" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/watch/templates/watch/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="35" column="143" lean-forward="true" selection-start-line="35" selection-start-column="80" selection-end-line="35" selection-end-column="143" />
+        <state relative-caret-position="135">
+          <caret line="85" column="18" lean-forward="true" selection-start-line="85" selection-start-column="18" selection-end-line="85" selection-end-column="18" />
           <folding>
             <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
@@ -981,14 +983,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/watch/templates/watch/product.html">
+    <entry file="file://$PROJECT_DIR$/watch/static/watch/js/ajax.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="89" column="117" lean-forward="false" selection-start-line="89" selection-start-column="117" selection-end-line="89" selection-end-column="117" />
+        <state relative-caret-position="353">
+          <caret line="58" column="3" lean-forward="false" selection-start-line="58" selection-start-column="3" selection-end-line="58" selection-end-column="3" />
           <folding>
-            <element signature="n#style#0;n#h4#0;n#a#0;n#h4#0;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#h4#1;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <marker date="1502684262000" expanded="true" signature="1736:1807" ph="..." />
           </folding>
         </state>
       </provider>
