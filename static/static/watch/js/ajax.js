@@ -33,6 +33,22 @@ $(function() {
         });
 
 
+$(document).ready(function() {
+    var filter_price_max = $( "#slider-range" ).slider( "values", 1 );
+    var filter_price_min = $( "#slider-range" ).slider( "values", 0 )
+	$.ajax({
+            url: "/search/",
+            type: "POST",
+            async: false,
+            data: {
+                csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken").val(),
+                filter_price_min,
+                filter_price_max
+            },
+            success: function(){
+                 $('#search-results').load('/search/');
+            }
+        });})
 
 
 $('#index_filter').submit(function () {
@@ -53,7 +69,8 @@ $('#index_filter').submit(function () {
              // all data will be passed here
         },
         success: function(data){
-             window.location.assign('watch');
+             window.location.assign('/watch');
+             console.log('ajax done')
         }
     });
 });
