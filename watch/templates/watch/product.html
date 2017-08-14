@@ -2,6 +2,26 @@
 {% block title %}product{% endblock %}
 
 {% block body %}
+<script>
+	$(document).ready(function() {
+    var filter_price_max = $( "#slider-range" ).slider( "values", 1 );
+    var filter_price_min = $( "#slider-range" ).slider( "values", 0 )
+	$.ajax({
+            url: "/search/",
+            type: "POST",
+            async: false,
+            data: {
+                csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken").val(),
+                filter_price_min,
+                filter_price_max
+            },
+            success: function(){
+                 $('#search-results').load('/search/');
+            }
+        });
+})
+
+</script>
 
 <div id="fh5co-main" style="padding-top:100px">
   <div class="container">

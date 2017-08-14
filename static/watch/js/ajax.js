@@ -46,7 +46,38 @@ $(document).ready(function() {
                 filter_price_max
             },
             success: function(){
-            	console.log('yo')
                  $('#search-results').load('/search/');
             }
         });})
+
+
+$('#index_filter').submit(function () {
+    console.log("Inside click");
+    var selected_brand = $('input[class="brand"]:checked').map(function(){return this.value;}).get();
+    var selected_movement = $('input[class="movement"]:checked').map(function(){return this.value;}).get();
+    var filter_price_max = $( "#slider-range" ).slider( "values", 1 );
+    var filter_price_min = $( "#slider-range" ).slider( "values", 0 );
+    $.ajax({
+        url: "/update_session/",
+        type: "POST",
+        data: {
+            "selected_brand[]": selected_brand,
+            "selected_movement[]": selected_movement,
+            filter_price_max,
+            filter_price_min,
+            csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken").val(),
+             // all data will be passed here
+        },
+        success: function(data){
+             window.location.assign('/watch');
+             console.log('ajax done')
+        }
+    });
+});
+//$(function() {
+//    $('#index_filter').change(function(){
+//        $.post('/update_session/', function(data) {
+//        alert(data);
+//        });
+//});
+//})
