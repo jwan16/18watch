@@ -7,7 +7,7 @@ from django.views.generic import View
 from .models import Brand, Watch, Carousel
 from django.shortcuts import render_to_response
 from django.db.models import Q
-import operator
+import re
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from numbers import Number
 from functools import reduce
@@ -15,7 +15,6 @@ from django import forms
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, HttpResponseNotAllowed
-
 
 def IndexView(request):
     brand_list = Brand.objects.all()
@@ -144,14 +143,17 @@ def filter(request):
         if len(request.session.get('filter_movement')) > 0:
             filtered_list = filtered_list.filter(movement__name__in=request.session.get('filter_movement'))
 
+    # Filter top search bar
+    search_query = request.session.get('search_query')
+    if search_query:
+        filtered_list = filtered_list.filter(
+            Q(name__icontains=search_query)|
+            Q(year__icontains=search_query)|
+            Q(watch_brand__name__icontains=search_query)|
+            Q(color__icontains=search_query)|
+            Q(movement__icontains=search_query)
+            ).distinct()
 
-
-    # filter_brand_list = request.POST.getlist("selected_brand[]")
-    # if filter_brand_list:
-    #     filtered_list = filtered_list.filter(watch_brand__name__in=filter_brand_list)
-    # filter_color_list = request.POST.getlist("selected_color[]")
-    # if filter_color_list:
-    #     filtered_list = filtered_list.filter(watch_color__name__in=filter_color_list)
 
     context = {
         "filtered_list": filtered_list,
@@ -190,6 +192,8 @@ def update_session(request):
     filter_price_min = request.POST.get("filter_price_min")
     filter_brand = request.POST.getlist("selected_brand[]")
     filter_movement = request.POST.getlist("selected_movement[]")
+    search_query = request.POST.get('custom-search-input')
+    request.session['search_query'] = search_query
     if filter_price_max:
         request.session['filter_price_max'] = filter_price_max
     if filter_price_min:
@@ -198,5 +202,5 @@ def update_session(request):
         request.session['filter_brand'] = filter_brand
     if len(filter_movement) >= 0:
         request.session['filter_movement'] = filter_movement
-    print(request.session.get('filter_price_max'))
+    print(request.session.get('search_query'))
     return HttpResponse('ok')

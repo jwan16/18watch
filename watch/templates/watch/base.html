@@ -57,6 +57,7 @@
 	<script src="{% static 'watch/js/main.js' %}"></script>
 	</head>
 	<body>
+
 	<header id="fh5co-header" role="banner" style="position: relative;">
 		<nav class="navbar navbar-default" role="navigation">
 			<div class="container">
@@ -85,6 +86,7 @@
 						{% else %}
 
 						<!-- Login -->
+
 						<li onmouseover="document.getElementById('login_panel').style.display = 'block';" onmouseout="document.getElementById('login_panel').style.display = 'none';">
 						  <a><span><span class="glyphicon glyphicon-user" aria-hidden="true" ></span>&nbspLogin<span class="border"></span></span></a>
 						  <ul id='login_panel' class="dropdown-menu" aria-labelledby="dropdownMenu1" style="width:100%; margin-top:-10px">
@@ -105,19 +107,18 @@
 						<!--<li><a href="/contact/"><span>Contact Us <span class="border"></span></span></a></li>-->
 					</ul>
 
-					<!--Search Form-->
-					<!--<div id="custom-search-input">-->
-					<!--<form href="/get/" class="input-group " role="search" method="GET" action="/watch" >-->
+					<div>
+					<form id="custom-search-input" class="input-group" >
 
-							<!--<input type="text" class="search-query form-control" placeholder="Search" id="srchFld" name="q" value="{{ request.GET.q }}"/>-->
+							<input type="text" class="search-query form-control" placeholder="Search" id="srchFld" name="q" value="{{ request.session.search_query }}"/>
 
-							<!--<span class="input-group-btn">-->
-								<!--<button id="submitButton" class="btn btn-danger" type="submit">-->
-									<!--<span class=" glyphicon glyphicon-search"></span>-->
-								<!--</button>-->
-							<!--</span>-->
+							<span class="input-group-btn">
+								<button id="submitButton" class="btn btn-danger" type="submit">
+									<span class=" glyphicon glyphicon-search"></span>
+								</button>
+							</span>
 
-					<!--</form>-->
+					</form>
 					<!--</div>-->
 				</div>
 			</div>

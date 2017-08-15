@@ -8,8 +8,6 @@ from watch import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-
-
     url(r'^', include('watch.urls')),
     url(r'^accounts/profile/$', TemplateView.as_view(template_name='watch/account/profile.html')),
     url(r'^testing',TemplateView.as_view(template_name='watch/testing.html')),

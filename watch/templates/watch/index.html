@@ -74,7 +74,7 @@
 				</a>
 				</h4>
 				<h4>
-				<input type="text" id="amount" min_price=0 max_price=100000  style="color:white; border:0; background-color:#337ab7; font-weight:bold; width:200px">
+				<input type="text" id="amount" min_price={{ request.session.filter_price_min }} max_price={{ request.session.filter_price_max }}  style="color:white; border:0; background-color:#337ab7; font-weight:bold; width:200px">
 				</h4>
 				<div id="slider-range" style="margin-bottom:15px"></div>
 			</div>
@@ -92,7 +92,6 @@
 <div class="fh5co-main" style="padding-top:50px">
 	<div class="container">
 
-		<!-- Recommended New release & Most Popular -->
 		<div class="col-md-6 col-sm-12"><h2>Browse by Brand</h2><br>
 			<div class="row">
 				{% for brand in brand_list %}
@@ -112,8 +111,8 @@
 		<!-- Recommended New release & Most Popular -->
 		<div class="span12">
 			<div id="tab" class="btn-group" data-toggle="buttons-radio">
-			  <a href="#new_release" class="btn btn-large btn-info active" data-toggle="tab">New Release</a>
-			  <a href="#most_popular" class="btn btn-large btn-info"  data-toggle="tab">Most Popular</a>
+			  <a href="#new_release" class="btn btn-large btn-info active" data-toggle="tab">Most Popular</a>
+			  <a href="#most_popular" class="btn btn-large btn-info"  data-toggle="tab">New Release</a>
 			</div>
 
 

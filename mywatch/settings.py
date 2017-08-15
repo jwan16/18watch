@@ -25,7 +25,7 @@ SECRET_KEY = '^40lz6@bd3yp%8#xav&(v)x@^va4urfr43xbdua7xb)ad001^('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['52.163.63.26','localhost','52.230.22.222', '127.0.0.1', '.*18watch.com']
+ALLOWED_HOSTS = [u'13.84.191.59','52.163.63.26','localhost','52.230.22.222', '127.0.0.1', '.*18watch.com']
 
 
 # Application definition
@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
+    # 'allauth.socialaccount.providers.facebook',
 ]
 
 MIDDLEWARE = [
@@ -68,7 +68,7 @@ ROOT_URLCONF = 'mywatch.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['./templates',],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

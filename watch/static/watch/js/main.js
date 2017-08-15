@@ -27,41 +27,6 @@
 		});
 	};
 
-//	var owlCrouselFeatureSlide = function() {
-//
-//		var owl = $('.owl-carousel');
-//
-//		owl.on('initialized.owl.carousel change.owl.carousel',function(elem){
-//			var current = elem.item.index;
-//			$(elem.target).find(".owl-item").eq(current).find(".to-animate").removeClass('fadeInUp animated');
-//		});
-//		owl.on('initialized.owl.carousel changed.owl.carousel',function(elem){
-//			window.setTimeout(function(){
-//				var current = elem.item.index;
-//				$(elem.target).find(".owl-item").eq(current).find(".to-animate").addClass('fadeInUp animated');
-//			}, 400);
-//     	});
-//
-//		owl.owlCarousel({
-//			items: 1,
-//		    loop: true,
-//		    margin: 0,
-//		    responsiveClass: true,
-//		    nav: true,
-//		    dots: true,
-//		    smartSpeed: 500,
-//		    autoplay: true,
-//			autoplayTimeout: 5000,
-//			autoplayHoverPause: true,
-//		    navText: [
-//		      "<i class='icon-arrow-left2 owl-direction'></i>",
-//		      "<i class='icon-arrow-right2 owl-direction'></i>"
-//	     	],
-//
-//		});
-//
-//	};
-
 
 	// Magnific Popup
 	// MagnificPopup
