@@ -25,6 +25,8 @@ def IndexView(request):
     feature_list = watch_list.filter(featured=True)
     latest_list = watch_list.order_by('pub_date')[:4]
     movement_list = Watch.objects.values_list('movement', flat=True).distinct()
+    request.session.setdefault('filter_price_max', 100000)
+    request.session.setdefault('filter_price_min', 0)
     context = {
         "watch_list": watch_list,
         "brand_list": brand_list,
@@ -195,7 +197,8 @@ def update_session(request):
     filter_brand = request.POST.getlist("selected_brand[]")
     filter_movement = request.POST.getlist("selected_movement[]")
     search_query = request.POST.get('custom-search-input')
-    request.session['search_query'] = search_query
+    if search_query is not None:
+        request.session['search_query'] = search_query
     if filter_price_max:
         request.session['filter_price_max'] = filter_price_max
     if filter_price_min:
