@@ -53,10 +53,27 @@ $('#index_filter').submit(function () {
              // all data will be passed here
         },
         success: function(data){
-             window.location.assign('watch');
+             window.location.assign('/watch');
         }
     });
 });
+
+$('#custom-search-input').submit(function () {
+    $.ajax({
+        url: "/update_session/",
+        type: "POST",
+        data: {
+            "custom-search-input": $('#srchFld').val(),
+            csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken").val(),
+             // all data will be passed here
+        },
+        success: function(data){
+             window.location.assign('/watch');
+        }
+    });
+});
+
+
 //$(function() {
 //    $('#index_filter').change(function(){
 //        $.post('/update_session/', function(data) {

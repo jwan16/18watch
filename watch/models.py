@@ -1,6 +1,5 @@
 from django.db import models
 from django.core.urlresolvers import reverse
-from multiupload.fields import MultiFileField
 from django.contrib.auth.models import User
 
 class Brand(models.Model):

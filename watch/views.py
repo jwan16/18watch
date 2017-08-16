@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.shortcuts import render, redirect
