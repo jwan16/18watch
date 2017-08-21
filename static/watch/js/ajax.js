@@ -73,6 +73,22 @@ $('#custom-search-input').submit(function () {
     });
 });
 
+$('[id=^browseby.*]').click(function () {
+    var selected_brand = [$('input[class="brand"]')];
+    console.log('browse_by')
+    $.ajax({
+        url: "/update_session/",
+        type: "POST",
+        data: {
+            "selected_brand[]": selected_brand,
+            csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken").val(),
+             // all data will be passed here
+        },
+        success: function(data){
+             window.location.assign('/watch');
+        }
+    });
+});
 
 //$(function() {
 //    $('#index_filter').change(function(){

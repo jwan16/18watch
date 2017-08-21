@@ -1,25 +1,18 @@
 # -*- coding: utf-8 -*-
 
 from django.views import generic
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-from django.core.urlresolvers import reverse_lazy
-from django.views.generic import View
 from .models import Brand, Watch, Carousel
-from django.shortcuts import render_to_response
 from django.db.models import Q
-import re
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from numbers import Number
-from functools import reduce
 from django import forms
-from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, HttpResponseNotAllowed
 
 def IndexView(request):
     brand_list = Brand.objects.all()
+    browse_by_brand_list = Brand.objects.all()[:8]
+
     watch_list = Watch.objects.all()
     carousel_list = Carousel.objects.all()
     feature_list = watch_list.filter(featured=True)
@@ -29,6 +22,7 @@ def IndexView(request):
     request.session.setdefault('filter_price_min', 0)
     context = {
         "watch_list": watch_list,
+        "browse_by_brand_list": browse_by_brand_list,
         "brand_list": brand_list,
         "feature_list": feature_list,
         "latest_list": latest_list,
@@ -66,7 +60,9 @@ def WatchList(request):
         watch_list = paginator.page(paginator.num_pages)
 
     selected_brand_list = request.session.get('filter_brand')
+    selected_movement_list = request.session.get('filter_movement')
 
+    print(selected_movement_list)
     request.session.setdefault('filter_price_max', 100000)
     request.session.setdefault('filter_price_min', 0)
     filter_price_max = request.session.get('filter_price_max')
@@ -82,6 +78,7 @@ def WatchList(request):
         "filter_price_max": filter_price_max,
         "filter_price_min": filter_price_min,
         "selected_brand_list": selected_brand_list,
+        "selected_movement_list": selected_movement_list,
     }
 
     return render(request, "watch/product.html",context)
@@ -145,7 +142,7 @@ def filter(request):
             filtered_list = filtered_list.filter(watch_brand__name__in=request.session.get('filter_brand'))
     if request.session.get('filter_movement') is not None:
         if len(request.session.get('filter_movement')) > 0:
-            filtered_list = filtered_list.filter(movement__name__in=request.session.get('filter_movement'))
+            filtered_list = filtered_list.filter(movement__in=request.session.get('filter_movement'))
 
     # Filter top search bar
     search_query = request.session.get('search_query')

@@ -35,7 +35,8 @@ $(function() {
 
 
 
-$('#index_filter_submit').click(function () {
+$('#index_filter').submit(function (e) {
+    e.preventDefault();
     console.log("Inside click");
     var selected_brand = $('input[class="brand"]:checked').map(function(){return this.value;}).get();
     var selected_movement = $('input[class="movement"]:checked').map(function(){return this.value;}).get();
@@ -58,7 +59,7 @@ $('#index_filter_submit').click(function () {
     });
 });
 
-$('#custom-search-input').submit(function (e) {
+$('#custom-search-input').submit(function () {
     $.ajax({
         url: "/update_session/",
         type: "POST",
@@ -71,9 +72,24 @@ $('#custom-search-input').submit(function (e) {
              window.location.assign('/watch');
         }
     });
-    e.preventDefault();
 });
 
+$("input[id^='browseby']").click(function () {
+    var selected_brand = [$(this).attr('value')];
+    console.log(selected_brand)
+    $.ajax({
+        url: "/update_session/",
+        type: "POST",
+        data: {
+            "selected_brand[]": selected_brand,
+            csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken").val(),
+             // all data will be passed here
+        },
+        success: function(data){
+             window.location.assign('/watch');
+        }
+    });
+});
 
 //$(function() {
 //    $('#index_filter').change(function(){
