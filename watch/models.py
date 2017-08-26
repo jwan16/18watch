@@ -30,13 +30,16 @@ class Watch(models.Model):
     bracelet_material = models.CharField(max_length=30, verbose_name="Bracelet Material")
     bracelet_color = models.CharField(max_length=30, verbose_name="Bracelet Color")
     bracelet_length = models.CharField(max_length=30, verbose_name="Bracelet Length")
-    pic = models.ImageField
+    pic = models.ImageField()
+    # Pictures for product detail page
     pic_s = models.ImageField()
     pic2_s = models.ImageField()
     pic3_s = models.ImageField()
+    pic4_s = models.ImageField()
     pic_l = models.ImageField()
     pic2_l = models.ImageField()
     pic3_l = models.ImageField()
+    pic4_l = models.ImageField()
     featured = models.BooleanField()
     pub_date = models.DateTimeField(auto_now_add=True)
 

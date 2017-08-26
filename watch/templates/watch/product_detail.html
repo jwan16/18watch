@@ -2,28 +2,64 @@
 {% block body %}
 {% load staticfiles %}
 <link rel="stylesheet" href="{% static 'watch/css/product.css' %}">
+<!-- new stuff-->
 
-<script src="{% static 'watch/js/product.js' %}"></script>
-<script type="text/javascript" src="{% static 'watch/js/jquery.elevatezoom.js' %}"></script>
+<script type="text/javascript" src="{% static 'watch/js/jquery.fancybox-plus.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'watch/css/jquery.fancybox-plus.css' %}" media="screen">
+<script type="text/javascript" src="{% static 'watch/js/jquery.ez-plus.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.17/css/jquery.ez-plus.css" media="screen">
+<!--<script type="text/javascript" src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.17/demo/js/web.js?m=20100203"></script>-->
 
-<script type="text/javascript" src="{% static 'watch/js/zoomer.js' %}"></script>
+<style>
+/*set a border on the images to prevent shifting*/
+#gallery_01 img {
+border: 2px solid white;
+}
+
+/*Change the colour*/
+.active img {
+border: 2px solid #333 !important;
+}
+</style>
+<!-- End of new stuff-->
 
 <div class="fh5co-main" style="padding-top:65px">
     <div class="container" >
         <div class="row">
-
-           <div class="col-xs-5 item-photo">
-                <img id="zoom_05"  data-zoom-image="/media/1.jpg" src="/media/{{ watch.pic }}" style="" />
+            <div class="col-md-12">
+            <h2>{{ watch.watch_brand }} - {{ watch.name }}</h2>
+            </div>
+           <div class="col-md-5">
+                <img id="img_01" src="/media/{{ watch.pic_s }}" data-zoom-image="/media/{{ watch.pic_l }}" style="width:100%; height:auto"/>
+                <div id="gal1">
+                    <div class="row" style="margin-top:30px">
+                        <div class="col-md-3">
+                        <a href="#" data-image="/media/{{ watch.pic_s }}" data-zoom-image="/media/{{ watch.pic_l }}">
+                            <img id="img_01" src="/media/{{ watch.pic_s }}"/>
+                        </a>
+                        </div>
+                        <div class="col-md-3">
+                        <a href="#" data-image="/media/{{ watch.pic2_s }}" data-zoom-image="/media/{{ watch.pic2_l }}">
+                            <img id="img_01" src="/media/{{ watch.pic2_s }}"/>
+                        </a>
+                        </div>
+                        <div class="col-md-3">
+                        <a href="#" data-image="/media/{{ watch.pic3_s }}" data-zoom-image="/media/{{ watch.pic3_l }}">
+                            <img id="img_01" src="/media/{{ watch.pic3_s }}"/>
+                        </a>
+                        </div>
+                        <div class="col-md-3">
+                        <a href="#" data-image="/media/{{ watch.pic_s }}" data-zoom-image="/media/{{ watch.pic_l }}">
+                            <img id="img_01" src="/media/{{ watch.pic_s }}"/>
+                        </a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="col-xs-7" style="border:0px solid gray">
-                <!-- Datos del vendedor y titulo del producto -->
-                <h3>Samsung Galaxy S4 I337 16GB 4G LTE Unlocked GSM Android Cell Phone</h3>
-                <h5 style="color:#337ab7">vendido por <a href="#">Samsung</a> · <small style="color:#337ab7">(5054 ventas)</small></h5>
 
-                <!-- Precios -->
-                <h6 class="title-price"><small>PRECIO OFERTA</small></h6>
-                <h3 style="margin-top:0px;">U$S 399</h3>
+                <h1>${{ watch.price }}</h1>
 
                 <!-- Detalles especificos del producto -->
                 <div class="section">
@@ -97,13 +133,131 @@
 </div>
 
 
+
+
+
+
+</div>
 <script>
-$("#zoom_05").elevateZoom({
-  zoomType				: "inner",
-  cursor: "crosshair"
+jQuery(document).ready(function () {
+
+    var $ctb = $('.table tbody'),
+        $cta = $ctb.find('td .arrow'),
+        $ctr = $cta.parents('tr');
+    //
+    ////	object toggelen
+    //$cta.click(function () {
+    //    return false;
+    //});
+    //$ctr.find('td:lt(2)').hover(
+    //    function () {
+    //        $(this).parent().addClass('hover');
+    //    },
+    //    function () {
+    //        $(this).parent().removeClass('hover');
+    //    }
+    //).click(function () {
+    //        $('span.params', this).toggle();
+    //        $(this).parent().toggleClass('closed').find('td:eq(1) small span').each(function () {
+    //            if (this.style.display === 'none')    $(this).show();
+    //            else                                $(this).hide();
+    //        });
+    //        var obj = $('.' + $(this).parent().next().attr('id'));
+    //        if (obj[0].style.display === 'none')    obj.show();
+    //        else                                    obj.hide();
+    //        return false;
+    //    }).css('cursor', 'pointer').end().find('td:lt(1)').click();
+    //
+    ////	achtergrond even/oneven
+    $ctb.each(function () {
+        var ctrn = 0;
+        $('.table tbody tr:odd').addClass('odd');
+        $('.table tbody tr:even').addClass('even');
+
+    });
+
+    //	code + italic
+    $ctb.find('tr').each(function () {
+        if ($('td', this).length === 5) $(this).find('td:eq(2)').wrapInner('<code />').end().find('td:eq(3)').addClass('italic');
+        if ($('td', this).length === 4) $(this).find('td:eq(2)').addClass('italic');
+        if ($('td', this).length === 3) $(this).find('td:eq(1)').addClass('italic');
+    });
+
+    /*
+     *   Zebra-stripping table
+     */
+
+    //$('table.options tr:even').addClass('even');
 });
+
+
+$(document).ready(function () {
+
+    // Using custom configuration
+    $('#img_01').ezPlus({
+        zoomWindowFadeIn: 500,
+        zoomLensFadeIn: 500,
+        zoomType: 'inner',
+        gallery: 'gal1',
+        imageCrossfade: true,
+        zoomWindowWidth: 451,
+        zoomWindowHeight: 274,
+        zoomWindowOffsetX: 10,
+        scrollZoom: true,
+        cursor: 'crosshair'
+    });
+
+
+    <!--$('#img_01').bind('click', function (e) {-->
+        <!--var ez = $('#img_01').data('ezPlus');-->
+        <!--$.fancyboxPlus(ez.getGalleryList());-->
+        <!--return false;-->
+    <!--});-->
+    $('#img_02').ezPlus({
+        gallery: 'gal2',
+        tint: true,
+        cursor: 'crosshair',
+        windowHeight: 600
+    });
+    $('#img_03').ezPlus({
+        zoomType: 'lens',
+        lensShape: 'round',
+        lensSize: 200
+    });
+
+
+    <!--$('#img_02').bind('click', function (e) {-->
+        <!--var ez = $('#img_02').data('ezPlus');-->
+        <!--$.fancyboxPlus(ez.getGalleryList());-->
+        <!--return false;-->
+    <!--});-->
+
+
+});
+
+$(document).ready(function () {
+    $(function () {
+        var slide_duration = 1000;
+        $('.view_source').click(function () {
+            t = $(this).attr('rel');
+            h = $('.' + t + '');
+            h.slideToggle(slide_duration);
+            if ($(this).html() === 'SHOW THE CODE') {
+                $(this).html('HIDE THE CODE');
+                h.show();
+            }
+            else {
+                $(this).html('SHOW THE CODE');
+            }
+            //slideToggle(slide_duration);
+            //	s.find('div.script:not('+h+')').slideUp(slide_duration);
+
+            return false;
+        });
+    });
+});
+
+
 </script>
 {% endblock %}
-
-
 
