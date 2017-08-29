@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^contact/$', TemplateView.as_view(template_name='watch/contact_us.html')),
     url(r'^about/$', TemplateView.as_view(template_name='watch/about_us.html')),
+    url(r'^terms/$', TemplateView.as_view(template_name='watch/terms.html')),
     url(r'^update_session/$', views.update_session),
 ]
 

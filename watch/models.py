@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
@@ -23,8 +24,8 @@ class Watch(models.Model):
     price = models.IntegerField()
     code = models.CharField(max_length=20, verbose_name="Code")
     ref_no = models.CharField(max_length=30, verbose_name="Ref. No.")
-    type = models.CharField(max_length=50, verbose_name="Type", choices=(('all', 'All'),('men', "Men's"),('women', "Women's")))
-    movement = models.CharField(max_length=50, verbose_name="Movement", choices=(('automatic', 'Automatic'),('manual', 'Manual'),('quartz', 'Quartz')))
+    type = models.CharField(max_length=50, verbose_name="Type", choices=(('all', '男女款'),('men', "男款"),('women', "女款")))
+    movement = models.CharField(max_length=50, verbose_name="Movement", choices=(('automatic', '自動錶'),('manual', '機械錶')))
     case_material = models.CharField(max_length=30, verbose_name="Case Material")
     color = models.CharField(max_length=30, verbose_name = "Color")
     bracelet_material = models.CharField(max_length=30, verbose_name="Bracelet Material")

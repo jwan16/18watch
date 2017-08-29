@@ -102,6 +102,27 @@
 					</ul>
 				  </div>
 
+				  <!-- Filter Type -->
+
+				  <div class="dropdown">
+					<button class="btn btn-default dropdown-toggle" type="button" id="filter_type" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width:100%; background-color:transparent">
+					  Type
+					<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="width:100%; margin-top:-20px">
+					  {% for type in type_list %}
+						<li class="list-group-item">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" value="{{ type }}" {% if type in selected_type_list %} checked {% endif %}  class="type" >
+									{{ type }}
+								</label>
+							</div>
+						</li>
+					  {% endfor %}
+					</ul>
+				  </div>
+
 				<!-- AJAX Price range -->
 				<h4 class="panel-title">
 				<a data-toggle="collapse" href="#collapse0">

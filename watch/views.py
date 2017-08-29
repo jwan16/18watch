@@ -11,12 +11,12 @@ from django.http import HttpResponse, HttpResponseNotAllowed
 
 def IndexView(request):
     brand_list = Brand.objects.all()
-    browse_by_brand_list = Brand.objects.all()[:4]
+    browse_by_brand_list = Brand.objects.all()[:6]
 
     watch_list = Watch.objects.all()
     carousel_list = Carousel.objects.all()
     feature_list = watch_list.filter(featured=True)
-    latest_list = watch_list.order_by('pub_date')[:4]
+    latest_list = watch_list.order_by('pub_date')[:6]
     movement_list = Watch.objects.values_list('movement', flat=True).distinct()
     request.session.setdefault('filter_price_max', 100000)
     request.session.setdefault('filter_price_min', 0)
@@ -37,6 +37,7 @@ def WatchList(request):
     watch_list = Watch.objects.all()
     color_list = Watch.objects.values_list('color', flat=True).distinct()
     movement_list = Watch.objects.values_list('movement', flat=True).distinct()
+    type_list = Watch.objects.values_list('type', flat=True).distinct()
     no_of_available = Watch.objects.all().count
     query = request.GET.get("q")
     filter = request.GET.get("filter")
@@ -61,6 +62,7 @@ def WatchList(request):
 
     selected_brand_list = request.session.get('filter_brand')
     selected_movement_list = request.session.get('filter_movement')
+    selected_type_list = request.session.get('filter_type')
 
     print(selected_movement_list)
     request.session.setdefault('filter_price_max', 100000)
@@ -79,6 +81,8 @@ def WatchList(request):
         "filter_price_min": filter_price_min,
         "selected_brand_list": selected_brand_list,
         "selected_movement_list": selected_movement_list,
+        "selected_type_list": selected_type_list,
+        "type_list": type_list,
     }
 
     return render(request, "watch/product.html",context)
@@ -108,15 +112,16 @@ def filter(request):
 
     # Filter Max Price
 
-
-
     # Get Ajax
     filter_price_max = request.POST.get("filter_price_max")
     filter_price_min = request.POST.get("filter_price_min")
     filter_color = request.POST.getlist("selected_color[]")
     filter_brand = request.POST.getlist("selected_brand[]")
     filter_movement = request.POST.getlist("selected_movement[]")
-    print(filter_brand)
+    filter_type = request.POST.getlist("selected_type[]")
+    print(filter_type)
+    if len(filter_type) >= 0:
+        request.session['filter_type'] = filter_type
     if filter_price_max:
         request.session['filter_price_max'] = filter_price_max
     if filter_price_min:
@@ -143,7 +148,11 @@ def filter(request):
     if request.session.get('filter_movement') is not None:
         if len(request.session.get('filter_movement')) > 0:
             filtered_list = filtered_list.filter(movement__in=request.session.get('filter_movement'))
-
+    if request.session.get('filter_type') is not None:
+        if len(request.session.get('filter_type')) > 0:
+            filtered_list = filtered_list.filter(type__in=request.session.get('filter_type'))
+    print('hi')
+    print(request.session['filter_type'])
     # Filter top search bar
     search_query = request.session.get('search_query')
     if search_query:
@@ -152,7 +161,8 @@ def filter(request):
             Q(year__icontains=search_query)|
             Q(watch_brand__name__icontains=search_query)|
             Q(color__icontains=search_query)|
-            Q(movement__icontains=search_query)
+            Q(movement__icontains=search_query)|
+            Q(type__icontains=search_query)
             ).distinct()
 
 
@@ -192,6 +202,7 @@ def update_session(request):
     filter_price_max = request.POST.get("filter_price_max")
     filter_price_min = request.POST.get("filter_price_min")
     filter_brand = request.POST.getlist("selected_brand[]")
+    filter_type = request.POST.getlist("selected_type[]")
     filter_movement = request.POST.getlist("selected_movement[]")
     search_query = request.POST.get('custom-search-input')
     if search_query is not None:
@@ -204,5 +215,7 @@ def update_session(request):
         request.session['filter_brand'] = filter_brand
     if len(filter_movement) >= 0:
         request.session['filter_movement'] = filter_movement
-    print(request.session.get('search_query'))
-    return HttpResponse('ok')
+    if len(filter_type) >= 0:
+        request.session['filter_type'] = filter_type
+
+    return render(request, "watch/search_result.html")

@@ -4,6 +4,7 @@ $(function() {
         var selected_brand = $('input[class="brand"]:checked').map(function(){return this.value;}).get();
         var selected_color = $('input[class="color"]:checked').map(function(){return this.value;}).get();
         var selected_movement = $('input[class="movement"]:checked').map(function(){return this.value;}).get();
+        var selected_type = $('input[class="type"]:checked').map(function(){return this.value;}).get();
         var filter_price_max = $( "#slider-range" ).slider( "values", 1 );
         var filter_price_min = $( "#slider-range" ).slider( "values", 0 )
         var filter_list = []
@@ -14,12 +15,13 @@ $(function() {
 //        });
 
         $.ajax({
-            url: "/search/", // link of your "whatever" php
+            url: "/update/", // link of your "whatever" php
             type: "POST",
             data: {
                 "selected_brand[]": selected_brand,
                 "selected_color[]": selected_color,
                 "selected_movement[]": selected_movement,
+                "selected_type[]": selected_type,
                 filter_price_max,
                 filter_price_min,
                 csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken").val(),
@@ -75,13 +77,18 @@ $('#custom-search-input').submit(function () {
 });
 
 $("input[id^='browseby']").click(function () {
-    var selected_brand = [$(this).attr('value')];
+    if($("input[id^='browsebybrand']")) {selected_brand = [$(this).attr('value')];}
+    if($("input[id^='browsebytype']")) {selected_type = [$(this).attr('value')];}
+    if($("input[id^='browsebymovement']")) {selected_movement = [$(this).attr('value')];}
+
     console.log(selected_brand)
     $.ajax({
         url: "/update_session/",
         type: "POST",
         data: {
             "selected_brand[]": selected_brand,
+            "selected_type[]": selected_type,
+            "selected_movement[]": selected_movement,
             csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken").val(),
              // all data will be passed here
         },
