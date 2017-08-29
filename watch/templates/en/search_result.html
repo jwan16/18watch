@@ -1,0 +1,19 @@
+	{% for watch in filtered_list %}
+		<div class="col-xs-6 col-sm-3" style="padding-left:10px; padding-right:10px">
+			<div class="card">
+				<a class="img-card various" href="{{ watch.id }}">
+					<img src="/media/{{ watch.pic }}" style="width:200px; height:200px;"/>
+				</a>
+				<div class="card-content">
+					<h5><a href="/watch/{{ watch.id }}">{{ watch.name }}</a></h5>
+					<h4><b>HK${{ watch.price }}</b></h4>
+					<h6>Seller:<b> {{ watch.owner }}</b></h6>
+				</div>
+				<div class="card-read-more">
+					<a class="btn btn-link btn-block" href="{{ watch.id }}" style="color: black">
+						VIEW DETAIL
+					</a>
+				</div>
+			</div>
+		</div>
+	{% endfor %}

@@ -1,0 +1,36 @@
+{% extends 'watch/base.html' %}
+{% block title %}All Brand{% endblock %}
+{% block body %}
+    <!-- Main -->
+
+    <div id="main">
+
+        <div class="row">
+            {% for watch in watch_list %}
+            <div class="col-sm-6 col-md-3">
+                <article class="mini-post">
+                    <header>
+                        <h3><a href="#">{{ watch.name }}</a></h3>
+                        <h3>{{ watch.brand }}</h3>
+                            <time class="published" datetime="2015-10-20">October 20, 2015</time>
+                    </header>
+                    <img src="/media/{{ watch.pic }}" style="width:250px; height:250px"/>
+                </article>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
+{% endblock %}

@@ -37,3 +37,15 @@ div.section > div > input {margin:0;padding-left:5px;font-size:10px;padding-righ
 
  /*Change the colour*/
  .active img{border:2px solid #333 !important;}
+
+
+/* Rating */
+/* http://www.jquery2dotnet.com/ */
+body{ margin-top:20px;}
+.glyphicon { margin-right:5px;}
+.rating .glyphicon {font-size: 22px;}
+.rating-num { margin-top:0px;font-size: 54px; }
+.progress { margin-bottom: 5px;}
+.progress-bar { text-align: left; }
+.rating-desc .col-md-3 {padding-right: 0px;}
+.sr-only { margin-left: 5px;overflow: visible;clip: auto; }

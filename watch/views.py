@@ -11,7 +11,7 @@ from django.http import HttpResponse, HttpResponseNotAllowed
 
 def IndexView(request):
     brand_list = Brand.objects.all()
-    browse_by_brand_list = Brand.objects.all()[:8]
+    browse_by_brand_list = Brand.objects.all()[:4]
 
     watch_list = Watch.objects.all()
     carousel_list = Carousel.objects.all()
