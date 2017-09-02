@@ -8,14 +8,13 @@ $(function() {
         var filter_price_max = $( "#slider-range" ).slider( "values", 1 );
         var filter_price_min = $( "#slider-range" ).slider( "values", 0 )
         var filter_list = []
-        console.log(selected_brand)
 //        var selected_price = [], selected_color =[], selected_brand = []
 //        $(".checkbox .brand:checked").each(function(){
 //                selected_brand.push($(this).val());
 //        });
 
         $.ajax({
-            url: "/update/", // link of your "whatever" php
+            url: "/search/", // link of your "whatever" php
             type: "POST",
             data: {
                 "selected_brand[]": selected_brand,

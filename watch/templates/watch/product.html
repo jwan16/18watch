@@ -9,6 +9,7 @@
     var selected_brand = $('input[class="brand"]:checked').map(function(){return this.value;}).get();
 	var selected_color = $('input[class="color"]:checked').map(function(){return this.value;}).get();
 	var selected_movement = $('input[class="movement"]:checked').map(function(){return this.value;}).get();
+	var selected_type = $('input[class="type"]:checked').map(function(){return this.value;}).get();
 	$.ajax({
             url: "/search/", // link of your "whatever" php
             type: "POST",
@@ -16,6 +17,7 @@
                 "selected_brand[]": selected_brand,
                 "selected_color[]": selected_color,
                 "selected_movement[]": selected_movement,
+                "selected_type[]": selected_type,
                 filter_price_max,
                 filter_price_min,
                 csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken").val(),
@@ -46,7 +48,7 @@
 		 		<!-- Filter Brand -->
 			    <div class="dropdown">
 				  <button class="btn btn-default dropdown-toggle" type="button" id="filter_brand" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width:100%; background-color:transparent">
-			  		Brand
+			  		品牌
 					<span class="caret"></span>
 				  </button>
 				  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="width:100%; margin-top:-20px">
@@ -65,7 +67,7 @@
 				<!-- Filter Color -->
 				  <div class="dropdown">
 					<button class="btn btn-default dropdown-toggle" type="button" id="filter_year" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width:100%; background-color:transparent">
-					  Color
+					  顏色
 					  <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="width:100%; margin-top:-20px">
@@ -85,7 +87,7 @@
 				<!-- Filter Movement -->
 				  <div class="dropdown">
 					<button class="btn btn-default dropdown-toggle" type="button" id="filter_movement" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width:100%; background-color:transparent">
-					  Movement
+					  類型
 					<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="width:100%; margin-top:-20px">
@@ -106,7 +108,7 @@
 
 				  <div class="dropdown">
 					<button class="btn btn-default dropdown-toggle" type="button" id="filter_type" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width:100%; background-color:transparent">
-					  Type
+					  性別
 					<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="width:100%; margin-top:-20px">
