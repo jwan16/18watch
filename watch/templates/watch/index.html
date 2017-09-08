@@ -80,7 +80,7 @@
 
 			<!-- Submit button -->
 			<div class="col-xs-6 col-sm-3 col-md-3">
-				<button class="btn btn-default dropdown-toggle" type='submit' style="width:100%; background-color:green">Submit</button>
+				<button class="btn btn-default dropdown-toggle" type='submit' style="width:100%; background-color:green">提交</button>
 			</div>
 			</form>
 		</div>
@@ -126,16 +126,15 @@
 					<div class="container">
 						<div class="row" style="padding-top:25px">
 							{% for watch in feature_list %}
-							<div class="col-xs-4 col-sm-2" style="padding-left:10px; padding-right:10px">
+							<div class="col-xs-4 col-sm-3" style="padding-left:10px; padding-right:10px">
 								<div class="card">
 									<a class="img-card various" href="/watch/{{ watch.id }}">
 										<img src="/media/{{ watch.pic }}" style="width:100%px; height:auto;"/>
 									</a>
 									<div class="card-content">
-										<h4><a href="/watch/{{ watch.id }}">{{ watch.name }}</a></h4>
+										<h4>{{ watch.watch_brand }}</h4>
+										<h5><a href="/watch/{{ watch.id }}">{{ watch.name }}</a></h5>
 										<h3><b>HK${{ watch.price }}</b></h3>
-										<h5><b> {{ watch.brand_name }}</b></h5>
-										<h5>Published date: {{ watch.pub_date }}</h5>
 									</div>
 									<div class="card-read-more">
 										<a class="btn btn-link btn-block" href="/watch/{{ watch.id }}" style="color: black">
@@ -182,147 +181,66 @@
 	</div>
 </div>
 
+<!-- 錶行銀庫-->
 <div class="fh5co-main" style="padding-top:100px">
 	<div class="container">
-
-		<!-- Recommended New release & Most Popular -->
-		<div class="span12">
-			<div id="tab" class="btn-group" data-toggle="buttons-radio">
-			  <a href="#new_release" class="btn btn-large btn-info active" data-toggle="tab">最受歡迎</a>
-			  <a href="#most_popular" class="btn btn-large btn-info"  data-toggle="tab">最新發怖</a>
-			</div>
-
-
-			<div class="tab-content">
-				<div class="tab-pane active" id="new_release">
-					<div class="container">
-						<div class="row" style="padding-top:25px">
-							{% for watch in feature_list %}
-							<div class="col-xs-4 col-sm-2" style="padding-left:10px; padding-right:10px">
-								<div class="card">
-									<a class="img-card various" href="/watch/{{ watch.id }}">
-										<img src="/media/{{ watch.pic }}" style="width:100%px; height:auto;"/>
-									</a>
-									<div class="card-content">
-										<h4><a href="/watch/{{ watch.id }}">{{ watch.name }}</a></h4>
-										<h3><b>HK${{ watch.price }}</b></h3>
-										<h5><b> {{ watch.brand_name }}</b></h5>
-										<h5>Published date: {{ watch.pub_date }}</h5>
-									</div>
-									<div class="card-read-more">
-										<a class="btn btn-link btn-block" href="/watch/{{ watch.id }}" style="color: black">
-											VIEW DETAIL
-										</a>
-									</div>
-								</div>
-							</div>
-							{% endfor %}
+		<div class="container">
+			<h2>錶行錶庫</h2>
+			<div class="row" style="padding-top:25px">
+				{% for watch in feature_list %}
+				<div class="col-xs-4 col-sm-2" style="padding-left:10px; padding-right:10px">
+					<div class="card">
+						<a class="img-card various" href="/watch/{{ watch.id }}">
+							<img src="/media/{{ watch.pic }}" style="width:100%px; height:auto;"/>
+						</a>
+						<div class="card-content">
+							<h4><a href="/watch/{{ watch.id }}">{{ watch.name }}</a></h4>
+							<h3><b>HK${{ watch.price }}</b></h3>
+							<h5><b> {{ watch.brand_name }}</b></h5>
 						</div>
-
-					</div>
-
-				</div>
-
-				<div class="tab-pane" id="most_popular">
-					 <div class="container">
-						<div class="row" style="padding-top:25px">
-							{% for watch in latest_list %}
-							<div class="col-xs-6 col-sm-3" style="padding-left:10px; padding-right:10px">
-								<div class="card">
-									<a class="img-card various" href="/watch/{{ watch.id }}">
-										<img src="/media/{{ watch.pic }}" style="width:275px; height:275px;"/>
-									</a>
-									<div class="card-content">
-										<h4><a href="/watch/{{ watch.id }}">{{ watch.name }}</a></h4>
-										<h3><b>HK${{ watch.price }}</b></h3>
-										<h5>Seller:<b> {{ watch.owner }}</b></h5>
-									</div>
-									<div class="card-read-more">
-										<a class="btn btn-link btn-block" href="/watch/{{ watch.id }}" style="color: black">
-											VIEW DETAIL
-										</a>
-									</div>
-								</div>
-							</div>
-							{% endfor %}
+						<div class="card-read-more">
+							<a class="btn btn-link btn-block" href="/watch/{{ watch.id }}" style="color: black">
+								VIEW DETAIL
+							</a>
 						</div>
-
 					</div>
 				</div>
+				{% endfor %}
 			</div>
+
 		</div>
+
 	</div>
 </div>
 
 <div class="fh5co-main" style="padding-top:100px">
 	<div class="container">
-
-		<!-- Recommended New release & Most Popular -->
-		<div class="span12">
-			<div id="tab" class="btn-group" data-toggle="buttons-radio">
-			  <a href="#new_release" class="btn btn-large btn-info active" data-toggle="tab">最受歡迎</a>
-			  <a href="#most_popular" class="btn btn-large btn-info"  data-toggle="tab">最新發怖</a>
-			</div>
-
-
-			<div class="tab-content">
-				<div class="tab-pane active" id="new_release">
-					<div class="container">
-						<div class="row" style="padding-top:25px">
-							{% for watch in feature_list %}
-							<div class="col-xs-4 col-sm-2" style="padding-left:10px; padding-right:10px">
-								<div class="card">
-									<a class="img-card various" href="/watch/{{ watch.id }}">
-										<img src="/media/{{ watch.pic }}" style="width:100%px; height:auto;"/>
-									</a>
-									<div class="card-content">
-										<h4><a href="/watch/{{ watch.id }}">{{ watch.name }}</a></h4>
-										<h3><b>HK${{ watch.price }}</b></h3>
-										<h5><b> {{ watch.brand_name }}</b></h5>
-										<h5>Published date: {{ watch.pub_date }}</h5>
-									</div>
-									<div class="card-read-more">
-										<a class="btn btn-link btn-block" href="/watch/{{ watch.id }}" style="color: black">
-											VIEW DETAIL
-										</a>
-									</div>
-								</div>
-							</div>
-							{% endfor %}
+		<div class="container">
+			<h2>私人錶庫</h2>
+			<div class="row" style="padding-top:25px">
+				{% for watch in feature_list %}
+				<div class="col-xs-4 col-sm-2" style="padding-left:10px; padding-right:10px">
+					<div class="card">
+						<a class="img-card various" href="/watch/{{ watch.id }}">
+							<img src="/media/{{ watch.pic }}" style="width:100%px; height:auto;"/>
+						</a>
+						<div class="card-content">
+							<h4><a href="/watch/{{ watch.id }}">{{ watch.name }}</a></h4>
+							<h3><b>HK${{ watch.price }}</b></h3>
+							<h5><b> {{ watch.brand_name }}</b></h5>
 						</div>
-
-					</div>
-
-				</div>
-
-				<div class="tab-pane" id="most_popular">
-					 <div class="container">
-						<div class="row" style="padding-top:25px">
-							{% for watch in latest_list %}
-							<div class="col-xs-6 col-sm-3" style="padding-left:10px; padding-right:10px">
-								<div class="card">
-									<a class="img-card various" href="/watch/{{ watch.id }}">
-										<img src="/media/{{ watch.pic }}" style="width:275px; height:275px;"/>
-									</a>
-									<div class="card-content">
-										<h4><a href="/watch/{{ watch.id }}">{{ watch.name }}</a></h4>
-										<h3><b>HK${{ watch.price }}</b></h3>
-										<h5>Seller:<b> {{ watch.owner }}</b></h5>
-									</div>
-									<div class="card-read-more">
-										<a class="btn btn-link btn-block" href="/watch/{{ watch.id }}" style="color: black">
-											VIEW DETAIL
-										</a>
-									</div>
-								</div>
-							</div>
-							{% endfor %}
+						<div class="card-read-more">
+							<a class="btn btn-link btn-block" href="/watch/{{ watch.id }}" style="color: black">
+								VIEW DETAIL
+							</a>
 						</div>
-
 					</div>
 				</div>
+				{% endfor %}
 			</div>
+
 		</div>
+
 	</div>
 </div>
 {% endblock %}

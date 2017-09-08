@@ -143,4 +143,4 @@ LOGIN_REDIRECT_URL='/'
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
-SESSION_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
