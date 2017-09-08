@@ -5652,7 +5652,6 @@ pre {
   font-size: 30px; }
 
 #fh5co-footer {
-  padding: 5em 0;
   border-top: 1px solid #e9e9e9; }
 #fh5co-footer .fh5co-footer-widget {
   float: left;
@@ -5787,7 +5786,7 @@ pre {
   margin-bottom: 30px; }
 
 .fh5co-row-padded {
-  padding: 50px 0; }
+}
 
 .owl-carousel .owl-controls, .owl-carousel-posts .owl-controls {
   margin-top: 0; }
