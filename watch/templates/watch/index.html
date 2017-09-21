@@ -18,7 +18,8 @@
 <div class="fh5co-main" style="padding-top:365px">
 	<div class="container">
 
-		<div  class="span12" style="background-color:#337ab7; height:125px; width:100%; padding:38px 15px 30px 15px">
+		<div  class="span12" style="background-color:#337ab7; border-radius: 10px; height:125px; width:100%; padding:38px 15px 30px 15px">
+			{% csrf_token %}
 			<form id="index_filter">
 			<!-- Filter Brand -->
 			<div class="col-xs-6 col-sm-3 col-md-3">
@@ -187,7 +188,7 @@
 		<div class="container">
 			<h2>錶行錶庫</h2>
 			<div class="row" style="padding-top:25px">
-				{% for watch in feature_list %}
+				{% for watch in commercial_watch_list %}
 				<div class="col-xs-4 col-sm-2" style="padding-left:10px; padding-right:10px">
 					<div class="card">
 						<a class="img-card various" href="/watch/{{ watch.id }}">
@@ -218,7 +219,7 @@
 		<div class="container">
 			<h2>私人錶庫</h2>
 			<div class="row" style="padding-top:25px">
-				{% for watch in feature_list %}
+				{% for watch in personal_watch_list %}
 				<div class="col-xs-4 col-sm-2" style="padding-left:10px; padding-right:10px">
 					<div class="card">
 						<a class="img-card various" href="/watch/{{ watch.id }}">
@@ -242,6 +243,36 @@
 		</div>
 
 	</div>
+</div>
+<div class="fh5co-main" style="padding-top:100px">
+	<div class="container" style="text-align: center">
+
+		<h2>Find a Place to Pop-up</h2>
+		<h5>A progeoprgjer</h5>
+		<div class="row">
+			<div class="col-md-4">
+				<h2>img</h2>
+				<h2>Choose a location</h2>
+				<p>storefrontreiongeoign egiofne eroin rioerio jreoij reioreio neriof neior nfioernf eiornf eionf eiofneoifnerfoiernf ieorfneoifn</p>
+			</div>
+
+			<div class="col-md-4">
+				<h2>img</h2>
+				<h2>Choose a location</h2>
+				<p>storefrontreiongeoign egiofne eroin rioerio jreoij reioreio neriof neior nfioernf eiornf eionf eiofneoifnerfoiernf ieorfneoifn</p>
+			</div>
+
+			<div class="col-md-4">
+				<h2>img</h2>
+				<h2>Choose a location</h2>
+				<p>storefrontreiongeoign egiofne eroin rioerio jreoij reioreio neriof neior nfioernf eiornf eionf eiofneoifnerfoiernf ieorfneoifn</p>
+			</div>
+		</div>
+
+
+		<button class="btn btn-default dropdown-toggle" type="submit" style="width:300px; background-color:green">Get Started for FREE!</button>
+	</div>
+
 </div>
 {% endblock %}
 {% block body %}

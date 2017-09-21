@@ -82,25 +82,53 @@ border: 2px solid #333 !important;
             </div>
         </div>
         <div class="row">
-            <h2 style="text-align:center; padding-top:40px">Details</h2>
-            <div class="col-xs-6">
-                <table>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <h4><b>Basic Information</b></h4>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h4><b>Movement</b></h4>
-                            </td>
-                            <td>
-                                {{ watch.movement }}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <h2 style="text-align:center; padding-top:40px; padding-bottom:30px">詳細資料</h2>
+            <div class="col-md-6">
+                <div class="col-md-12" style="border-bottom: 1px solid"><b>基本資料</b></div>
+                <!-- Name -->
+                <div class="row">
+                <div class="col-md-6" style="padding-top:10px; padding-bottom: 10px">手錶名稱</div>
+                <div class="col-md-6" style="padding-top:10px; padding-bottom: 10px">{{ watch.name }}</div>
+                </div>
+                <!-- Year -->
+                <div class="row">
+                <div class="col-md-6" style="padding-top:10px; padding-bottom: 10px">手錶年份</div>
+                <div class="col-md-6" style="padding-top:10px; padding-bottom: 10px">{{ watch.year }}</div>
+                </div>
+                <!-- Type -->
+                <div class="row">
+                <div class="col-md-6" style="padding-top:10px; padding-bottom: 10px">手錶類型</div>
+                <div class="col-md-6" style="padding-top:10px; padding-bottom: 10px">{{ watch.type }}</div>
+                </div>
+                <!-- Movement -->
+                <div class="row">
+                <div class="col-md-6" style="padding-top:10px; padding-bottom: 10px">機芯</div>
+                <div class="col-md-6" style="padding-top:10px; padding-bottom: 10px">{{ watch.movement.display }}</div>
+                </div>
+                <!-- case_material -->
+                <div class="row">
+                <div class="col-md-6" style="padding-top:10px; padding-bottom: 10px">錶面材料</div>
+                <div class="col-md-6" style="padding-top:10px; padding-bottom: 10px">{{ watch.case_material }} </div>
+                </div>
+                <!-- case_size -->
+                <div class="row">
+                <div class="col-md-6" style="padding-top:10px; padding-bottom: 10px">錶面大小</div>
+                <div class="col-md-6" style="padding-top:10px; padding-bottom: 10px">{{ watch.case_size }} </div>
+                </div>
+                <!-- color -->
+                <div class="row">
+                <div class="col-md-6" style="padding-top:10px; padding-bottom: 10px">顏色</div>
+                <div class="col-md-6" style="padding-top:10px; padding-bottom: 10px">{{ watch.color }} </div>
+                </div>
+                <!-- style -->
+                <div class="row">
+                <div class="col-md-6" style="padding-top:10px; padding-bottom: 10px">款式</div>
+                <div class="col-md-6" style="padding-top:10px; padding-bottom: 10px">{{ watch.style.display }} </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-12" style="border-bottom: 1px solid"><b>詳細介紹</b></div>
+                <div class="col-md-6" style="padding-top:10px; padding-bottom: 10px">{{ watch.des }}</div>
             </div>
         </div>
     </div>

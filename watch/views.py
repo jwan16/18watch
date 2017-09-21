@@ -2,22 +2,30 @@
 
 from django.views import generic
 from django.shortcuts import render, redirect
-from .models import Brand, Watch, Carousel
+from .models import Brand, Watch, Carousel, UserProfile
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django import forms
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, HttpResponseNotAllowed
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
 
 def IndexView(request):
     brand_list = Brand.objects.all()
     browse_by_brand_list = Brand.objects.all()[:6]
-
     watch_list = Watch.objects.all()
     carousel_list = Carousel.objects.all()
     feature_list = watch_list.filter(featured=True)
     latest_list = watch_list.order_by('pub_date')[:6]
     movement_list = Watch.objects.values_list('movement', flat=True).distinct()
+
+    # Personal & Commercial
+    personal_user_list = UserProfile.objects.filter(type='personal').values_list('user', flat=True)
+    personal_watch_list = watch_list.filter(owner__in=personal_user_list)[:6]
+    commercial_user_list = UserProfile.objects.filter(type='commercial').values_list('user', flat=True)
+    commercial_watch_list = watch_list.filter(owner__in=commercial_user_list)[:6]
+
     request.session.setdefault('filter_price_max', 100000)
     request.session.setdefault('filter_price_min', 0)
     context = {
@@ -28,6 +36,8 @@ def IndexView(request):
         "latest_list": latest_list,
         "carousel_list": carousel_list,
         "movement_list": movement_list,
+        'personal_watch_list': personal_watch_list,
+        'commercial_watch_list': commercial_watch_list,
     }
     return render(request, "watch/index.html", context)
 
@@ -64,7 +74,6 @@ def WatchList(request):
     selected_movement_list = request.session.get('filter_movement')
     selected_type_list = request.session.get('filter_type')
 
-    print(selected_movement_list)
     request.session.setdefault('filter_price_max', 100000)
     request.session.setdefault('filter_price_min', 0)
     filter_price_max = request.session.get('filter_price_max')
@@ -119,7 +128,6 @@ def filter(request):
     filter_brand = request.POST.getlist("selected_brand[]")
     filter_movement = request.POST.getlist("selected_movement[]")
     filter_type = request.POST.getlist("selected_type[]")
-    print(filter_type)
     if len(filter_type) >= 0:
         request.session['filter_type'] = filter_type
     if filter_price_max:
@@ -151,8 +159,7 @@ def filter(request):
     if request.session.get('filter_type') is not None:
         if len(request.session.get('filter_type')) > 0:
             filtered_list = filtered_list.filter(type__in=request.session.get('filter_type'))
-    print('hi')
-    print(request.session['filter_type'])
+
     # Filter top search bar
     search_query = request.session.get('search_query')
     if search_query:
@@ -219,3 +226,18 @@ def update_session(request):
         request.session['filter_type'] = filter_type
 
     return render(request, "watch/search_result.html")
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('home')
+    else:
+        form = UserCreationForm()
+    return render(request, 'watch/signup.html', {'form': form})

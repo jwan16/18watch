@@ -2,6 +2,11 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 class Brand(models.Model):
     name = models.CharField(max_length=250, unique=True)
@@ -20,6 +25,7 @@ class Watch(models.Model):
     watch_brand = models.ForeignKey(Brand, on_delete=models.CASCADE, verbose_name="Brand")
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     name =  models.CharField(max_length=50, verbose_name="名稱")
+    des = models.CharField(max_length=2000, verbose_name="詳細介紹")
     year =  models.CharField(max_length=10, verbose_name="Year")
     price = models.IntegerField()
     code = models.CharField(max_length=20, verbose_name="Code")
@@ -63,6 +69,9 @@ class Carousel(models.Model):
     bg = models.FileField()
 
 
-class Member(models.Model):
-    name = models.CharField(max_length=100)
-    type = models.CharField(max_length=50, verbose_name="會員類型", choices=(('commercial', '錶行'),('personal', "個人")))
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+    type = models.CharField(max_length=20, verbose_name="款式", choices=(('personal', '私人'),('commercial', "錶行")))
+    address = models.CharField(max_length=500)
+    def __str__(self):
+        return str(self.user)

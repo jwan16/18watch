@@ -7,6 +7,7 @@ from .views import (
     DetailList,
     filter,
     InventoryByUserListView,
+    signup
 )
 
 app_name = 'watch'

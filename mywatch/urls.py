@@ -12,7 +12,7 @@ urlpatterns = [
     url(r'^accounts/profile/$', TemplateView.as_view(template_name='watch/account/profile.html')),
     url(r'^testing',TemplateView.as_view(template_name='watch/testing.html')),
     # url(r'^accounts/', include('allauth.urls')),
-    url(r'^accounts/', include('allauth.urls')),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^contact/$', TemplateView.as_view(template_name='watch/contact_us.html')),
     url(r'^about/$', TemplateView.as_view(template_name='watch/about_us.html')),
     url(r'^terms/$', TemplateView.as_view(template_name='watch/terms.html')),

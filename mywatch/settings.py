@@ -144,3 +144,4 @@ LOGIN_REDIRECT_URL='/'
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
 # SESSION_COOKIE_SECURE = True
+# AUTH_PROFILE_MODULE = 'userprofile.UserProfile'
