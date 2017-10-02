@@ -10,6 +10,18 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, HttpResponseNotAllowed
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
+from django.views.generic import DeleteView
+from django.urls import reverse_lazy
+from django.core.exceptions import PermissionDenied
+
+class PermissionMixin(object):
+
+    def get_object(self, *args, **kwargs):
+        obj = super(PermissionMixin, self).get_object(*args, **kwargs)
+        if not obj.owner == self.request.user:
+            raise PermissionDenied()
+        else:
+            return obj
 
 def IndexView(request):
     brand_list = Brand.objects.all()
@@ -241,3 +253,11 @@ def signup(request):
     else:
         form = UserCreationForm()
     return render(request, 'watch/signup.html', {'form': form})
+
+
+
+class WatchDelete(DeleteView):
+    model = Watch
+    success_url = '/watch/inventory'
+
+

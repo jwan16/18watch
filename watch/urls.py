@@ -7,6 +7,7 @@ from .views import (
     DetailList,
     filter,
     InventoryByUserListView,
+    WatchDelete,
     signup
 )
 
@@ -19,4 +20,6 @@ urlpatterns = [
     url(r'^watch/(?P<pk>[0-9]+)$', DetailList.as_view(), name='detail'),
     url(r'^search/$', filter),
     url(r'^watch/inventory/$', InventoryByUserListView.as_view(), name='my-borrowed'),
+    url(r'^watch/(?P<pk>[0-9]+)/delete/$', WatchDelete.as_view(), name='entry-delete'),
+
 ]
