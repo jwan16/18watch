@@ -87,11 +87,12 @@
 						  <a><span><span class="glyphicon glyphicon-user" aria-hidden="true" ></span>登入<span class="border"></span></span></a>
 						  <ul id='login_panel' class="dropdown-menu" aria-labelledby="dropdownMenu1" style="width:100%; margin-top:-10px">
 						  	<li>
-								<form method="post" action="{% url 'login' %}">
+								<form method="post" action="{% url 'login' %}" style="text-align:center">
 									{% csrf_token %}
-									<input type="text" name="username" value="" id="username">
-									<input type="password" name="password" value="" id="password">
-									<input type="submit" value="login" />
+									<input type="text" name="username" placeholder="Username" id="username">
+									<input type="password" name="password" placeholder="Password" id="password">
+									<input type="button" onclick="window.location='/signup';" value="Register" />
+									<input type="submit" value="Login" />
 									<input type="hidden" name="next" value="{{ next|escape }}" />
 								</form>
 							</li>

@@ -24,32 +24,32 @@ class Brand(models.Model):
 class Watch(models.Model):
     watch_brand = models.ForeignKey(Brand, on_delete=models.CASCADE, verbose_name="Brand")
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    name =  models.CharField(null=True, max_length=50, verbose_name="名稱")
-    des = models.CharField(null=True, max_length=2000, verbose_name="詳細介紹")
-    year =  models.CharField(null=True, max_length=10, verbose_name="Year")
-    price = models.IntegerField(null=True)
-    code = models.CharField(null=True, max_length=20, verbose_name="Code")
-    ref_no = models.CharField(null=True, max_length=30, verbose_name="Ref. No.")
-    type = models.CharField(null=True, max_length=50, verbose_name="Type", choices=(('all', '男女款'),('men', "男款"),('women', "女款")))
-    movement = models.CharField(null=True, max_length=50, verbose_name="機芯", choices=(('automatic', '	自動發條'),('manual', '機械錶')))
-    case_material = models.CharField(null=True, max_length=30, verbose_name="錶面材料")
-    case_size = models.CharField(null=True, max_length=50, verbose_name="錶面大小", choices=(('<26', '<26 mm'), ('26-30', '26-30 mm'),('31-35', '31-35 mm'), ('36-39', '36-39 mm'),('40-41', "40-41 mm"),('42-43', "42-43mm"), ('>43', '>43 mm')),blank=True)
-    color = models.CharField(null=True, max_length=30, verbose_name = "顏色",choices=(("black","黑"),("bronze","銅"),("champagne","香濱金"),("green","綠"),("navy","海軍藍"),("silver","銀"),("white","白"),("beige","米"),("blue","藍"),("brown","啡"),("pink","粉紅"),("black","黑"),("bronze","銅"),("champagne","香濱金"),("green","綠"),("navy","海軍藍"),("silver","銀"),("white","白"),("beige","米"),("blue","藍"),("brown","啡"),("pink","粉紅")), blank=True)
+    name =  models.CharField(max_length=50, verbose_name="名稱")
+    des = models.CharField(null=True, blank=True, max_length=2000, verbose_name="詳細介紹")
+    year =  models.CharField(null=True, blank=True, max_length=10, verbose_name="Year")
+    price = models.IntegerField(null=True, blank=True)
+    code = models.CharField(null=True, blank=True, max_length=20, verbose_name="Code")
+    ref_no = models.CharField(null=True, blank=True, max_length=30, verbose_name="Ref. No.")
+    type = models.CharField(null=True, blank=True, max_length=50, verbose_name="Type", choices=(('all', '男女款'),('men', "男款"),('women', "女款")))
+    movement = models.CharField(null=True, blank=True, max_length=50, verbose_name="機芯", choices=(('automatic', '	自動發條'),('manual', '機械錶')))
+    case_material = models.CharField(null=True, blank=True, max_length=30, verbose_name="錶面材料")
+    case_size = models.CharField(null=True, blank=True, max_length=50, verbose_name="錶面大小", choices=(('<26', '<26 mm'), ('26-30', '26-30 mm'),('31-35', '31-35 mm'), ('36-39', '36-39 mm'),('40-41', "40-41 mm"),('42-43', "42-43mm"), ('>43', '>43 mm')))
+    color = models.CharField(null=True, blank=True, max_length=30, verbose_name = "顏色",choices=(("black","黑"),("bronze","銅"),("champagne","香濱金"),("green","綠"),("navy","海軍藍"),("silver","銀"),("white","白"),("beige","米"),("blue","藍"),("brown","啡"),("pink","粉紅"),("black","黑"),("bronze","銅"),("champagne","香濱金"),("green","綠"),("navy","海軍藍"),("silver","銀"),("white","白"),("beige","米"),("blue","藍"),("brown","啡"),("pink","粉紅")))
     # bracelet_material = models.CharField(max_length=30, verbose_name="Bracelet Material")
     # bracelet_color = models.CharField(max_length=30, verbose_name="Bracelet Color")
     # bracelet_length = models.CharField(max_length=30, verbose_name="Bracelet Length")
-    style = models.CharField(null=True, max_length=50, verbose_name="款式", choices=(('casual', '休閒'),('military', "軍事"),('pilot', "機師"),("sport","運動"),("dive","潛水"),("dress","晚宴"),("racing","賽車")), blank=True)
-    pic = models.ImageField(null=True)
+    style = models.CharField(null=True, blank=True, max_length=50, verbose_name="款式", choices=(('casual', '休閒'),('military', "軍事"),('pilot', "機師"),("sport","運動"),("dive","潛水"),("dress","晚宴"),("racing","賽車")))
+    pic = models.ImageField(null=True, blank=True)
     # Pictures for product detail page
-    pic_s = models.ImageField(null=True)
-    pic2_s = models.ImageField(null=True)
-    pic3_s = models.ImageField(null=True)
-    pic4_s = models.ImageField(null=True)
-    pic_l = models.ImageField(null=True)
-    pic2_l = models.ImageField(null=True)
-    pic3_l = models.ImageField(null=True)
-    pic4_l = models.ImageField(null=True)
-    featured = models.BooleanField()
+    pic_s = models.ImageField(null=True, blank=True)
+    pic2_s = models.ImageField(null=True, blank=True)
+    pic3_s = models.ImageField(null=True, blank=True)
+    pic4_s = models.ImageField(null=True, blank=True)
+    pic_l = models.ImageField(null=True, blank=True)
+    pic2_l = models.ImageField(null=True, blank=True)
+    pic3_l = models.ImageField(null=True, blank=True)
+    pic4_l = models.ImageField(blank=True, null=True)
+    featured = models.NullBooleanField()
     pub_date = models.DateTimeField(auto_now_add=True)
 
 
@@ -75,3 +75,20 @@ class UserProfile(models.Model):
     address = models.CharField(max_length=500)
     def __str__(self):
         return str(self.user)
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    type = models.CharField(max_length=20, verbose_name="款式", choices=(('personal', '私人'), ('commercial', "錶行")))
+    address = models.CharField(max_length=500)
+
+    def __str__(self):
+        return str(self.user)
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()

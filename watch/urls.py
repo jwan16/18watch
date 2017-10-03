@@ -8,6 +8,8 @@ from .views import (
     filter,
     InventoryByUserListView,
     WatchDelete,
+    WatchCreate,
+    WatchEdit,
     signup
 )
 
@@ -19,7 +21,8 @@ urlpatterns = [
     url(r'^watch/$', WatchList, name='watch'),
     url(r'^watch/(?P<pk>[0-9]+)$', DetailList.as_view(), name='detail'),
     url(r'^search/$', filter),
-    url(r'^watch/inventory/$', InventoryByUserListView.as_view(), name='my-borrowed'),
+    url(r'^watch/inventory/$', InventoryByUserListView.as_view(), name='inventory'),
     url(r'^watch/(?P<pk>[0-9]+)/delete/$', WatchDelete.as_view(), name='entry-delete'),
-
+    url(r'^watch/create$', WatchCreate, name='create-watch'),
+    url(r'^watch/(?P<pk>[0-9]+)/edit/$', WatchEdit.as_view(), name="edit-user-profile"),
 ]

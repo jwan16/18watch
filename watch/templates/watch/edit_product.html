@@ -1,0 +1,21 @@
+{% extends 'watch/base.html' %}
+
+{% block body %}
+{% if user.is_authenticated %}
+<div class="container" style="padding-top:70px; padding-bottom:50px">
+  <h2>修改產品</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Sign up</button>
+  </form>
+{% else %}
+<div class="fh5co-main" style="padding-top: 70px; padding-bottom:50px">
+<div style="text-align: center">
+  <h3 >請先登入</h3>
+  <h4><a href="/">按此返回主頁</a></h4>
+</div>
+</div>
+</div>
+{% endif %}
+{% endblock %}

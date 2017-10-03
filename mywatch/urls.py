@@ -6,6 +6,7 @@ from django.conf.urls.static import static
 from django.views.generic.base import TemplateView
 from watch import views
 
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('watch.urls')),
@@ -17,6 +18,7 @@ urlpatterns = [
     url(r'^about/$', TemplateView.as_view(template_name='watch/about_us.html')),
     url(r'^terms/$', TemplateView.as_view(template_name='watch/terms.html')),
     url(r'^update_session/$', views.update_session),
+    url(r'^signup/$', views.signup, name='signup'),
 ]
 
 if settings.DEBUG:

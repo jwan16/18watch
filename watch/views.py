@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.views import generic
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Brand, Watch, Carousel, UserProfile
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -10,9 +10,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, HttpResponseNotAllowed
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from django.views.generic import DeleteView
-from django.urls import reverse_lazy
+from django.urls import reverse
+from django.views.generic import DeleteView, UpdateView
+from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
+from .forms import UserForm, CreateWatchForm, WatchEditForm
 
 class PermissionMixin(object):
 
@@ -195,9 +197,9 @@ class DetailList(generic.DetailView):
     model = Watch
     template_name = 'watch/product_detail.html'
 
-class UserForm(forms.Form):
-    username = forms.CharField(label='用户名',max_length=100)
-    password = forms.CharField(label='密码',widget=forms.PasswordInput())
+# class UserForm(forms.Form):
+#     username = forms.CharField(label='用户名',max_length=100)
+#     password = forms.CharField(label='密码',widget=forms.PasswordInput())
 
 
 
@@ -261,3 +263,50 @@ class WatchDelete(DeleteView):
     success_url = '/watch/inventory'
 
 
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+        type_form = UserTypeForm()
+        if form.is_valid():
+            form.save()
+            # type_form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('/')
+    else:
+        form = UserCreationForm()
+    return render(request, 'watch/signup.html', {'form': form})
+
+def WatchCreate(request):
+    if request.method == 'POST':
+        form = CreateWatchForm(request.POST)
+        if form.is_valid():
+            form.owner = request.user
+            form.save()
+            return redirect('/')
+    else:
+        form = CreateWatchForm()
+    return render(request, 'watch/add_watch.html', {'form': form})
+
+
+class WatchEdit(UpdateView):
+    model = Watch
+    form_class = WatchEditForm
+    template_name = "watch/edit_product.html"
+
+    def get_object(self, *args, **kwargs):
+        user = get_object_or_404(Watch, pk=self.kwargs['pk'])
+
+        # We can also get user object using self.request.user  but that doesnt work
+        # for other models.
+
+        return user
+
+    def get_success_url(self, *args, **kwargs):
+        return reverse('watch:inventory')

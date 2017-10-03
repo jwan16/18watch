@@ -7,32 +7,14 @@
 	<div class="row">
 		<h1>Inventory Management <span class="title-label"></h1>
         <h3>Account Name：{% load account %}{% user_display user %}</span></h3>
-
- <!-- Search Panel-->
-        <!--<nav class="navbar navbar-default query" role="query">-->
-            <!--<div class="container-fluid">-->
-                <!--<div class="navbar-header">-->
-                    <!--<a class="navbar-barnd" href="javascript:void(0);">账号名称</a>-->
-
-                <!--</div>-->
-                <!--<div class="collapse navbar-collapse" id="">-->
-                    <!--<div class="navbar-form navbar-left">-->
-                        <!--<input type="text" class="form-control" />-->
-                        <!--<button class="btn btn-default">查询</button>-->
-                    <!--</div>-->
-                    <!--<button class="btn btn-primary create pull-right">Add Watch</button>-->
-                <!--</div>-->
-
-            <!--</div>-->
-        <!--</nav>-->
-<!-- End Search Panel -->
+        <input type="button" onclick="window.location.href='/watch/create'" value="新建貨品"></input>
 
         <div class="table-responsive col-md-12">
             <table name="ogmoaieg" class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>Watch Name</th><th>状态</th>
-                        <th>角色/权限</th><th>备注</th><th>操作</th>
+                        <th>Watch Name</th><th>狀態</th>
+                        <th>角色</th><th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,29 +22,17 @@
                     <tr>
                         <td><p>{{ watch.name }}</p></td>
                         <td><p><span class="label label-success">Activate</span></p></td>
-                        <td><p>系统管理员</p></td>
-                        <td><p></p></td>
+                        <td><p>Admin</p></td>
                         <td class="col-md-2"><p>
-                            <a href="#" style="color:black">修改資料</a>
-                            <a href="#" style="color:black">删除貨品</a>
-                            {{ watch.id }}
-                            <form action="{% url 'watch:entry-delete' watch.id %}" method="post">
+                            <input type="button" onclick="window.location.href='/watch/{{ watch.id }}/edit/'" value="修改貨品"></input>
+                            <form id="delete_{{ watch.id }}" action="{% url 'watch:entry-delete' watch.id %}" method="post">
                                 {% csrf_token %}
-                                <input type="submit" value="Delete" />
+                                <input type="submit" value="删除貨品" />
                             </form>
                         </p></td>
                     </tr>
                     {% endfor %}
-                    <tr>
-                        <td><p>Testing 2</p></td>
-                        <td><p><span class="label label-success">Activate</span></p></td>
-                        <td><p>系统管理员</p></td>
-                        <td><p></p></td>
-                        <td class="col-md-2"><p>
-                            <a href="#" style="color:black">修改資料</a>
-                            <a href="#" style="color:black">删除貨品</a>
-                        </p></td>
-                    </tr>
+
 
                 </tbody>
             </table>
