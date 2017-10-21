@@ -1,4 +1,11 @@
 	{% for watch in filtered_list %}
+		{% load staticfiles %}
+		<script src="{% static 'watch/js/jquery.matchHeight.js' %}"></script>
+		<script>
+		$(function() {
+			$('.align_div').matchHeight();
+		});
+		</script>
 		<div class="col-xs-6 col-sm-3" style="padding-left:10px; padding-right:10px">
 			<div class="card">
 				<a class="img-card various" href="{{ watch.id }}">
