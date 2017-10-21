@@ -294,7 +294,6 @@ def WatchCreate(request):
         form = CreateWatchForm()
     return render(request, 'watch/add_watch.html', {'form': form})
 
-
 class WatchEdit(UpdateView):
     model = Watch
     form_class = WatchEditForm
