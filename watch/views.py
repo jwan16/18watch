@@ -251,7 +251,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('home')
+            return redirect('/')
     else:
         form = UserCreationForm()
     return render(request, 'watch/signup.html', {'form': form})
@@ -267,21 +267,20 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 
-def signup(request):
-    if request.method == 'POST':
-        form = UserForm(request.POST)
-        type_form = UserTypeForm()
-        if form.is_valid():
-            form.save()
-            # type_form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('/')
-    else:
-        form = UserCreationForm()
-    return render(request, 'watch/signup.html', {'form': form})
+# def signup(request):
+#     if request.method == 'POST':
+#         form = UserForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             # type_form.save()
+#             username = form.cleaned_data.get('username')
+#             raw_password = form.cleaned_data.get('password1')
+#             user = authenticate(username=username, password=raw_password)
+#             login(request, user)
+#             return redirect('/')
+#     else:
+#         form = UserCreationForm()
+#     return render(request, 'watch/signup.html', {'form': form})
 
 def WatchCreate(request):
     if request.method == 'POST':
